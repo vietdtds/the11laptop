@@ -1,0 +1,5 @@
+ALTER TABLE products
+ADD COLUMN detail_images TEXT NULL;
+
+ALTER TABLE bills
+ADD COLUMN id_user INT NULL;
