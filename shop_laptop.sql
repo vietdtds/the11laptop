@@ -9,7 +9,7 @@
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone = "+07:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -424,10 +424,6 @@ ALTER TABLE `bill_detail`
   ADD KEY `id_post_bill_detail` (`id_post_bill_detail`);
 
 --
--- Chỉ mục cho bảng `coupon`
---
-ALTER TABLE `coupon`
-  ADD PRIMARY KEY (`coupon_id`);
 
 --
 -- Chỉ mục cho bảng `customer`
@@ -510,11 +506,7 @@ ALTER TABLE `bills`
 ALTER TABLE `bill_detail`
   MODIFY `id_bill_detail` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
---
--- AUTO_INCREMENT cho bảng `coupon`
---
-ALTER TABLE `coupon`
-  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 
 --
 -- AUTO_INCREMENT cho bảng `customer`
