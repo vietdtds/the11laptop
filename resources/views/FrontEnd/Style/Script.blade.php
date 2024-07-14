@@ -381,7 +381,7 @@
 
     function view(){
       if (!localStorage.getItem('data')){
-        $('#count_wish').append(`
+        $('#count_wish').html(`
           <i class="lnr lnr-heart"></i>
           <span class="my-cart" >
             <span>{{ trans('home.yeu') }}</span><span>{{ trans('home.thich') }} (0)</span>
@@ -395,7 +395,7 @@
         // document.getElementById('single_product_like').style.overflow = 'scroll';
         // document.getElementById('single_product_like').style.height = '100%';
         if (data.length>0) {
-          $('#maylike').append(`
+          $('#maylike').html(`
               <div class="like-product ptb-95 off-white-bg pt-sm-50 pb-sm-55 " id="del-background`+id+`">
                   <div class="container" id="wish_top">
                       <div class="like-product-area" >
@@ -418,7 +418,7 @@
                   <!-- Container End -->
               </div>
           `);
-          $('#count_wish').append(`
+          $('#count_wish').html(`
             <i class="lnr lnr-heart"></i>
             <span class="my-cart" >
               <span>{{ trans('home.yeu') }}</span><span>{{ trans('home.thich') }} (`+data.length+`)</span>
@@ -433,8 +433,8 @@
             </div>
           `);
         }else{
-          $('#maylike').append(`<div></div>`);
-          $('#count_wish').append(`
+          $('#maylike').html(`<div></div>`);
+          $('#count_wish').html(`
             <i class="lnr lnr-heart"></i>
             <span class="my-cart" >
               <span>{{ trans('home.yeu') }}</span><span>{{ trans('home.thich') }} (0)</span>
@@ -523,7 +523,7 @@
       }else{
         old_data.push(newItem);
 
-        $('#maylike').append(`
+        $('#maylike').html(`
             <div class="like-product ptb-95 off-white-bg pt-sm-50 pb-sm-55 ">
                 <div class="container">
                     <div class="like-product-area" >
@@ -577,7 +577,7 @@
 
         $('#product_wishlist').append('<tr id="delete_trall'+id+'" ><td class="product-remove"><a style="cursor: pointer;" onclick="del_wishList('+id+')" title="Remove"><i class="fa fa-times" aria-hidden="true"></i></a></td><td class="product-thumbnail"><a href="#"><img src="'+image+'" alt="cart-image" /></a></td><td class="product-name"><a href="'+url+'">'+name+'</a></td> <td class="product-price"><span class="amount">'+price+'</span></td><td class="product-stock-status"><span>{{ trans('home.INSTOCK') }}</span></td><td class="product-add-to-cart"><a href="'+url+'">{{ trans('home.addcart') }}</a></td></tr>');
         if (old_data.length <=1 || old_data.length >4) {
-            location.reload();
+/*            location.reload();*/
         }
       }
 

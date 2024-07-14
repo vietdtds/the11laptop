@@ -33,7 +33,8 @@ All Product
                                 @foreach($loai_sanpham as $sl)
                                 <?php $sp_sp = App\Models\Product::where('id_type',$sl->id )->get()->count(); ?>
                                 <li>
-                                    <a href="{{route('loaisanpham',$sl->id)}}">{{$sl->name_type}} ({{$sp_sp}})</a>
+                                    <a href="{{route('loaisanpham',$sl->id)}}">{{$sl->name_type}}</a>
+                         {{--           <a href="{{route('loaisanpham',$sl->id)}}">{{$sl->name_type}} ({{$sp_sp}})</a>--}}
                                 </li>
                                 @endforeach
                             </ul>
