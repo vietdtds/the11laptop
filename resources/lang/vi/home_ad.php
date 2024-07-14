@@ -6,7 +6,7 @@ return [
 	'add' => 'Thêm Mới',
 	'account_information' => 'Thông tin tài khoản',
 	'ql_sp' => 'Quản Lý Sản Phẩm',
-	'ql_nsx' => 'Quản Lý Loại Sản Phẩm',
+	'ql_nsx' => 'Quản Lý Danh Mục',
 	'ql_tk' => 'Quản Lý Tài Khoản',
 	'ql_dh' => 'Quản Lý Đơn Hàng',
 	'ql_slide' => 'Quản Lý Slide',

@@ -29,15 +29,6 @@ return [
     'trangthai' => 'Trạng Thái',
     'pay' => 'Hình Thức Thanh Toán',
 
-    //Ma giam gia
-    'namecoupon' => 'Tên Mã Giảm Giá',
-    'codecoupon' => 'Mã Giảm Giá',
-    'qtycoupon' => 'Số Lượng',
-    'sophamtram' => 'Số % Hoặc Tiền Giảm',
-    'tinhnang' => 'Tính Năng',
-    'tinhnangphantram' => 'Giảm Theo Phần Trăm',
-    'tinhnangtien' => 'Giảm Theo Số Tiền',
-    'guimagiamgia' => 'Gửi Mã Khuyến Mãi',
 
 
 ];
