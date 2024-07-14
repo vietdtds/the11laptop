@@ -6,7 +6,7 @@
 </div>
 <!-- Banner Popup End -->
 <!-- Newsletter Popup Start -->
-<div class="popup_wrapper">
+{{--<div class="popup_wrapper">
     <div class="test">
         <span class="popup_off">Close</span>
         <div class="subscribe_area text-center mt-60">
@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>--}}
 <!-- Newsletter Popup End -->
 <!-- Main Header Area Start Here -->
 <header>

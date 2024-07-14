@@ -1,5 +1,5 @@
 @extends('Layout')
-@section('title')    
+@section('title')
 Search
 @endsection
 @section('content-layout')
@@ -99,12 +99,12 @@ Search
                                     <!-- Product Content End -->
                                 </div>
                                 @endforeach
-                                <!-- Single Product End -->                                       
+                                <!-- Single Product End -->
                             </div>
                             <!-- Side Item End -->
                         </div>
                     </div>
-                    <!-- Product Top End -->                            
+                    <!-- Product Top End -->
                     <!-- Single Banner Start -->
                     <div class="col-img">
                         <a href="#"><img src="{{asset('source/assets/frontend/img/banner/banner-sidebar.jpg')}}" alt="slider-banner"></a>
@@ -187,8 +187,8 @@ Search
                                             <div class="pro-actions">
                                                 <div class="actions-primary">
                                                     @if($seach_pro->product_quantity>0)
-                                                    <a 
-                                                    <?php 
+                                                    <a
+                                                    <?php
                                                         if(Auth::check() || Session::get('user_name_login')){
                                                             $addnewcart = route('themgiohang',$seach_pro->id);
                                                         }else{
@@ -219,12 +219,12 @@ Search
                         <div id="list-view" class="tab-pane fade">
                             <!-- Single Product Start -->
                             @foreach($product as $seach_pro)
-                            <div class="single-product"> 
+                            <div class="single-product">
                                 <div class="beta-products-details">
                                     <p class="pull-left">{{count($product)}} styles found</p>
                                     <div class="clearfix"></div>
                                 </div>
-                                <div class="row">        
+                                <div class="row">
                                     <!-- Product Image Start -->
                                     <input type="hidden" id="wishList_product_name{{$seach_pro->id}}" value="{{$seach_pro->$multisp}}" >
                                     <input type="hidden" id="wishList_price{{$seach_pro->id}}" value="@if($seach_pro->promotion_price == 0)
@@ -261,13 +261,13 @@ Search
                                                 <div class="actions-primary">
                                                     @if($seach_pro->product_quantity>0)
                                                     <a
-                                                    <?php 
+                                                    <?php
                                                         if(Auth::check() || Session::get('user_name_login')){
                                                             $addnewcart = route('themgiohang',$seach_pro->id);
                                                         }else{
                                                             $addnewcart = route('dangnhap');
                                                         }
-                                                    ?> 
+                                                    ?>
                                                     href="{{$addnewcart}}"
                                                     title="" data-original-title="{{ trans('home.addcart') }}"> + {{ trans('home.addcart') }}</a>
                                                     @else
@@ -303,7 +303,7 @@ Search
                     <div class="clearfix"></div>
                 </div>
                 @endif
-                
+
             </div>
             <!-- product Categorie List End -->
         </div>

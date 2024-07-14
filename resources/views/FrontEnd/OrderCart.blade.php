@@ -138,7 +138,7 @@ Order Cart
 	                                    </td>
 	                                    <td class="product-total">
 
-	                                        <span class="amount">{{number_format( $cart['price'] * $cart['qty'],0,',','.') }} VNĐ</span>
+	                                        <span class="amount">{{number_format( $cart['price'],0,',','.') }} VNĐ</span>
 	                                    </td>
 	                                </tr>
 									@endforeach

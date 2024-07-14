@@ -91,19 +91,7 @@
                        <!-- Cart Button Start -->
 
                         <div class="col-md-8 col-sm-12">
-                        	@if(!Session::get('coupon'))
-							<form method="post" action="{{url('/check-coupon')}}">
-                            <div class="buttons-cart">
 
-									@csrf
-									<div>
-										<input type="text" name="coupon_code" placeholder="{{trans('home.CodeCoupon')}}" style="background: #fff; border: 1px solid #000; text-transform: none;color: #000">
-										<input type="submit" name="check_coupon" value="{{trans('home.ApplyCoupon')}}">
-									</div>
-
-                            </div>
-							</form>
-							@endif
                             <div class="buttons-cart">
                                 <!-- <input type="submit" value="Update Cart" /> -->
                                 <a href="{{route('trang-chu')}}"><i class="fa fa-angle-left movleft"></i> {{trans('home.ContinueShopping')}}</a>

@@ -18,7 +18,7 @@
                                 <tr>
                                     <td align="left" valign="middle" style="width:500px;height:60px">
                                         <a href="{{route('trang-chu')}}" style="border:0" target="_blank" width="130" height="35" style="display:block;border:0px">
-                                            <img src="https://i.pinimg.com/564x/82/d5/8c/82d58cc9bf292c83f3518adba5356826.jpg" height="110px" width="155px" style="display:block;border:0px;float: left;"> <b style="float: left;line-height: 100px;color: red;font-size: 20px;"></b>
+                                            <img src="https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/444481785_964019015727563_2981531306231500305_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=QOErfGjEfw4Q7kNvgGNRAV1&_nc_ht=scontent.fhan15-2.fna&oh=00_AYDrXYp4acx-OhnKez7ItluDcxeqCkfs9kBxoUM8fvmGvg&oe=66839F0B" height="110px" width="155px" style="display:block;border:0px;float: left;"> <b style="float: left;line-height: 100px;color: red;font-size: 20px;"></b>
                                         </a>
                                     </td>
                                     <td align="right" valign="middle" style="padding-right:15px">
@@ -166,7 +166,7 @@
                                         <br> Nếu có bất kỳ thắc mắc hay cần giúp đỡ, Bạn vui lòng ghé thăm
                                         <b style="font-family:Arial,Helvetica,sans-serif;font-size:13px;text-decoration:none;font-weight:bold">Trung tâm trợ giúp</b> của chúng tôi tại địa chỉ:
                                         <a href="{{route('lienhe')}}" style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#0066cc;text-decoration:none;font-weight:bold" target="_blank">
-                                            help.shoppv.vn
+                                            help.the11laptop.vn
                                         </a>
                                     </td>
                                 </tr>
