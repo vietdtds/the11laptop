@@ -15,11 +15,7 @@
                         <i class="fa fa-plus" aria-hidden="true"></i> {{ trans('home_ad.add') }}
                     </button>
                 </tr>
-{{--                <tr>--}}
-{{--                    <button style="margin-left: 10px" type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#ExcelProduct"><i class="fas fa-file-excel"></i>--}}
-{{--                        {{ trans('home_ad.import') }} / {{ trans('home_ad.export') }} Excel--}}
-{{--                    </button>--}}
-{{--                </tr>--}}
+
             </table>
         </div>
         <div class="card-body">
@@ -185,10 +181,10 @@
                                                     <label style="font-weight: bold; color: #000" >{{ trans('Ql_sp.giauudai') }}</label>
                                                     <input type="text" id="e_promotion_price_{{$sp->id}}" name="promotion_price" class="form-control"  value="{{$sp->promotion_price}}" />
                                                 </div>
-{{--                                                <div class="form-group">--}}
-{{--                                                    <label style="font-weight: bold; color: #000" >Date Sale</label>--}}
-{{--                                                    <input type="text" id="date_sale_product_{{$sp->id}}" name="date_sale" class="form-control"  value="{{$sp->date_sale}}"/>--}}
-{{--                                                </div>--}}
+                                             <div class="form-group">
+                                                    <label style="font-weight: bold; color: #000" >Date Sale</label>
+                                                    <input type="text" id="date_sale_product_{{$sp->id}}" name="date_sale" class="form-control"  value="{{$sp->date_sale}}"/>
+                                                </div>
 
                                                  <div class="form-group" style="font-weight: bold; color: #000">
                                                     <label style="font-weight: bold; color: #000">{{ trans('Ql_sp.new_top') }}</label>
@@ -345,10 +341,10 @@
                             <label style="font-weight: bold; color: #000" >{{ trans('Ql_sp.giauudai') }}</label>
                             <input type="text" id="e_promotion_price" name="promotion_price" class="form-control"  />
                         </div>
-{{--                        <div class="form-group">--}}
-{{--                            <label style="font-weight: bold; color: #000" >Date Sale</label>--}}
-{{--                            <input type="text" id="date_sale_product" name="date_sale" class="form-control"  />--}}
-{{--                        </div>--}}
+                        <div class="form-group">
+                            <label style="font-weight: bold; color: #000" >Date Sale</label>
+                            <input type="text" id="date_sale_product" name="date_sale" class="form-control"  />
+                        </div>
 
                          <div class="form-group" style="font-weight: bold; color: #000">
                             <label style="font-weight: bold; color: #000">{{ trans('Ql_sp.new_top') }}</label>

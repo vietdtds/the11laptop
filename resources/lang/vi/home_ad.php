@@ -26,7 +26,7 @@ return [
 	'number_order' => 'SỐ ĐƠN HÀNG',
 	'number_type' => 'SỐ LOẠI SẢN PHẨM',
 	'number_product' => 'SỐ SẢN PHẨM',
-
+    'slide_count'=>'SỐ LƯỢNG SLIDE',
 	'thongke_dh' => 'Thống Kê Doanh Số Đơn Hàng',
 	'tungay' => 'Từ ngày',
 	'denngay' => 'Đến ngày',

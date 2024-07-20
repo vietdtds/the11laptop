@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use DB;
 use PDF;
 use File;
@@ -9,44 +8,23 @@ use Hash;
 use Mail;
 use DNS1D;
 use DNS2D;
-use Excel;
 use Carbon\Carbon;
 use App\Models\Bill;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Slide;
 
-use App\Models\Coupon;
 use App\Models\Account;
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Visitors;
-use App\Exports\ExportNsx;
-use App\Imports\ImportNsx;
 use App\Models\BillDetail;
-// use App\Imports\ImportProduct;
-use App\Exports\ExportPost;
-use App\Imports\ImportPost;
 use App\Models\ProductType;
 use App\Models\Statistical;
-use App\Exports\ExportOrder;
-
-use App\Exports\ExportSlide;
-use App\Imports\ImportSlide;
 use Illuminate\Http\Request;
-use App\Exports\ExportCoupon;
 
-use App\Imports\ImportCoupon;
-use App\Exports\ExportProduct;
-use App\Imports\ImportAccount;
-use App\Exports\ExportAllAccount;
-use App\Exports\ExportOrderCancel;
-use App\Exports\ExportUserAccount;
-use App\Exports\ExportAdminAccount;
-use App\Exports\ExportOrderApproved;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
-use App\Exports\ExportOrderUnapproved;
 use Illuminate\Support\Facades\Session;
 
 class admincontroller extends Controller
@@ -55,15 +33,16 @@ class admincontroller extends Controller
     {
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-            if(Auth::user()->level != 1){
+            if (Auth::user()->level != 1) {
                 return redirect()->route('trang-chu');
             }
             return $next($request);
         });
     }
 
-    public function getIndexAdminDash(Request $req){
-    	if (Auth::check() && Auth::user()->level == 1) {
+    public function getIndexAdminDash(Request $req)
+    {
+        if (Auth::check() && Auth::user()->level == 1) {
 
             $url_canonical = $req->url();
             // $user_ip_address = '192.168.1.42';
@@ -75,65 +54,64 @@ class admincontroller extends Controller
             $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
             //tong thang truoc
-            $tong_thangtruoc = Visitors::whereBetween('date_visitor', [$dau_thangtruoc,$cuoi_thangtruoc])->get();
+            $tong_thangtruoc = Visitors::whereBetween('date_visitor', [$dau_thangtruoc, $cuoi_thangtruoc])->get();
             $tong_thangtruoc_count = $tong_thangtruoc->count();
 
             //tong thang nay
-            $tong_thangnay = Visitors::whereBetween('date_visitor', [$dauthangnay,$now])->get();
+            $tong_thangnay = Visitors::whereBetween('date_visitor', [$dauthangnay, $now])->get();
             $tong_thangnay_count = $tong_thangnay->count();
 
             //tong 1 nam
-            $tong_motnam = Visitors::whereBetween('date_visitor', [$sub365ngay,$now])->get();
+            $tong_motnam = Visitors::whereBetween('date_visitor', [$sub365ngay, $now])->get();
             $tong_motnam_count = $tong_motnam->count();
 
             //tat ca
             $tatca_count = Visitors::all()->count();
 
 
-    		return view('admin.Dashboard', compact('tatca_count', 'tong_thangtruoc_count', 'tong_thangnay_count', 'tong_motnam_count', 'url_canonical'));
-    	}
-    	else
-    		return redirect()->route('trang-chu');
+            return view('admin.Dashboard', compact('tatca_count', 'tong_thangtruoc_count', 'tong_thangnay_count', 'tong_motnam_count', 'url_canonical'));
+        } else
+            return redirect()->route('trang-chu');
     }
 
 
-
-/*-----------------------------------------------User--------------------------------------------------------------------*/
-    public function getQL_NguoiDung(Request $req){
+    /*-----------------------------------------------User--------------------------------------------------------------------*/
+    public function getQL_NguoiDung(Request $req)
+    {
         if (Auth::check() && Auth::user()->level == 1) {
             $user = User::all();
             $url_canonical = $req->url();
 
-            return view('admin.QL_nguoidung', compact('user','url_canonical' ));
-        }
-        else{
+            return view('admin.QL_nguoidung', compact('user', 'url_canonical'));
+        } else {
             return redirect()->route('trang-chu');
         }
 
     }
 
-    public function getQL_NguoiDung_user(Request $req){
+    public function getQL_NguoiDung_user(Request $req)
+    {
         if (Auth::check() && Auth::user()->level == 1) {
 
-            $taikhoan_user = User::where('level',2)->get();
+            $taikhoan_user = User::where('level', 2)->get();
             $url_canonical = $req->url();
 
-            return view('admin.QL_nguoidung_user', compact('taikhoan_user','url_canonical'));
-        }
-        else{
+            return view('admin.QL_nguoidung_user', compact('taikhoan_user', 'url_canonical'));
+        } else {
             return redirect()->route('trang-chu');
         }
 
     }
-    public function getQL_NguoiDung_ad(Request $req){
+
+    public function getQL_NguoiDung_ad(Request $req)
+    {
         if (Auth::check() && Auth::user()->level == 1) {
 
-            $taikhoan_ad = User::where('level',1)->get();
+            $taikhoan_ad = User::where('level', 1)->get();
             $url_canonical = $req->url();
 
             return view('admin.QL_nguoidung_ad', compact('taikhoan_ad', 'url_canonical'));
-        }
-        else{
+        } else {
             return redirect()->route('trang-chu');
         }
 
@@ -146,40 +124,41 @@ class admincontroller extends Controller
         return redirect()->back()->with('thongbao', 'Xóa thành công!');
     }
 
-    public function AddAdmin(Request $req){
-        if(Session::get('locale') == 'vi' || Session::get('locale') == null){
+    public function AddAdmin(Request $req)
+    {
+        if (Session::get('locale') == 'vi' || Session::get('locale') == null) {
             $this->validate($req,
                 [
-                    'email'=>'required|email|unique:users,email',
-                    'password'=>'required|min:6|max:20',
-                    'name'=>'required',
-                    're_password'=>'required|same:password'
+                    'email' => 'required|email|unique:users,email',
+                    'password' => 'required|min:6|max:20',
+                    'name' => 'required',
+                    're_password' => 'required|same:password'
 
                 ],
                 [
-                    'name.required'=>'Vui lòng nhập full name',
+                    'name.required' => 'Vui lòng nhập full name',
 
-                    'email.required'=>'Vui lòng nhập email',
-                    'email.email'=>'Email không đúng định dạng',
-                    'email.unique'=>'Email đã được sử dụng',
+                    'email.required' => 'Vui lòng nhập email',
+                    'email.email' => 'Email không đúng định dạng',
+                    'email.unique' => 'Email đã được sử dụng',
 
-                    'password.required'=>'Vui lòng nhập mật khẩu',
-                    'password.min'=>'Mật khẩu ít nhất 6 ký tự',
-                    'password.max'=>'Mật khẩu không quá 20 ký tự',
+                    'password.required' => 'Vui lòng nhập mật khẩu',
+                    'password.min' => 'Mật khẩu ít nhất 6 ký tự',
+                    'password.max' => 'Mật khẩu không quá 20 ký tự',
 
-                    're_password.required'=>'Vui lòng nhập lại mật khẩu',
-                    're_password.same'=>'Mật khẩu không giống nhau'
+                    're_password.required' => 'Vui lòng nhập lại mật khẩu',
+                    're_password.same' => 'Mật khẩu không giống nhau'
 
                 ]);
-        }else{
+        } else {
             $this->validate($req,
-            [
-                'email'=>'required|email|unique:users,email',
-                'password'=>'required|min:6|max:20',
-                'name'=>'required',
-                're_password'=>'required|same:password'
+                [
+                    'email' => 'required|email|unique:users,email',
+                    'password' => 'required|min:6|max:20',
+                    'name' => 'required',
+                    're_password' => 'required|same:password'
 
-            ]);
+                ]);
         }
         $user = new User();
         $user->full_name = $req->name;
@@ -193,39 +172,39 @@ class admincontroller extends Controller
     }
 
 
-
-    public function postUpdateAdmin(Request $req,$id){
-        if(Session::get('locale') == 'vi' || Session::get('locale') == null){
+    public function postUpdateAdmin(Request $req, $id)
+    {
+        if (Session::get('locale') == 'vi' || Session::get('locale') == null) {
             $this->validate($req,
-            [
-                'email'=>'required|email',
+                [
+                    'email' => 'required|email',
 
-                'name'=>'required',
+                    'name' => 'required',
 
-            ],
-            [
-                'name.required'=>'Vui lòng nhập full name',
+                ],
+                [
+                    'name.required' => 'Vui lòng nhập full name',
 
-                'email.required'=>'Vui lòng nhập email',
-                'email.email'=>'Email không đúng định dạng',
+                    'email.required' => 'Vui lòng nhập email',
+                    'email.email' => 'Email không đúng định dạng',
 
-            ]);
-        }else{
+                ]);
+        } else {
             $this->validate($req,
-            [
-                'email'=>'required|email',
+                [
+                    'email' => 'required|email',
 
-                'name'=>'required',
+                    'name' => 'required',
 
-            ]);
+                ]);
         }
-        $user_up=User::where('id',$id)->first();
+        $user_up = User::where('id', $id)->first();
         $user_up->full_name = $req->name;
         $user_up->email = $req->email;
         if ($req->password) {
             $user_up->password = Hash::make($req->password);
-        }else{
-            $user_up->password =$user_up->password;
+        } else {
+            $user_up->password = $user_up->password;
         }
         $user_up->phone = $req->phone;
         $user_up->address = $req->adress;
@@ -235,26 +214,29 @@ class admincontroller extends Controller
         return redirect()->back()->with('thongbao', 'Cập nhật thành công!');
     }
 
-    public function active_user($id){
-        User::where('id',$id)->update(['level'=>2]);
-        return redirect()->back();
-    }
-    public function unactive_user($id){
-        User::where('id',$id)->update(['level'=>1]);
+    public function active_user($id)
+    {
+        User::where('id', $id)->update(['level' => 2]);
         return redirect()->back();
     }
 
-/*-----------------------------------------------Slide-------------------------------------------------------------------*/
-    public function getQL_Slide(Request $req){
+    public function unactive_user($id)
+    {
+        User::where('id', $id)->update(['level' => 1]);
+        return redirect()->back();
+    }
+
+    /*-----------------------------------------------Slide-------------------------------------------------------------------*/
+    public function getQL_Slide(Request $req)
+    {
         if (Auth::check() && Auth::user()->level == 1) {
             $slide = Slide::all();
             // $slide = Slide::where('status_slide',0)->get();
             $url_canonical = $req->url();
 
 
-
             return view('admin.QL_slide', compact('slide', 'url_canonical'));
-        }else{
+        } else {
             return redirect()->route('trang-chu');
 
         }
@@ -271,30 +253,31 @@ class admincontroller extends Controller
         return redirect()->back()->with('thongbao', 'Xóa thành công!');
     }
 
-    public function AddAdmin_Slide(Request $req){
+    public function AddAdmin_Slide(Request $req)
+    {
         $slide = new Slide();
-        if(Session::get('locale') == 'vi' || Session::get('locale') == null){
+        if (Session::get('locale') == 'vi' || Session::get('locale') == null) {
             $this->validate($req,
-            [
-                // 'link_slide'=>'required',
-                'image_file' => 'required|mimes:jpg,jpeg,png,gif|max:4096',
+                [
+                    // 'link_slide'=>'required',
+                    'image_file' => 'required|mimes:jpg,jpeg,png,gif|max:4096',
 
-            ],
-            [
-                // 'link_slide.required'=>'Vui lòng nhập link',
+                ],
+                [
+                    // 'link_slide.required'=>'Vui lòng nhập link',
 
-                'image_file.required'=>'Vui lòng chọn hình',
-                'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
-                'image_file.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
+                    'image_file.required' => 'Vui lòng chọn hình',
+                    'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
+                    'image_file.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
 
-            ]);
-        }else{
+                ]);
+        } else {
             $this->validate($req,
-            [
-                // 'link_slide'=>'required',
-                'image_file' => 'required|mimes:jpg,jpeg,png,gif|max:4096',
+                [
+                    // 'link_slide'=>'required',
+                    'image_file' => 'required|mimes:jpg,jpeg,png,gif|max:4096',
 
-            ]);
+                ]);
         }
 
         $slide->link = $req->link_slide;
@@ -318,32 +301,33 @@ class admincontroller extends Controller
     }
 
 
-    public function postUpdateSlide(Request $req, $id){
+    public function postUpdateSlide(Request $req, $id)
+    {
         if (Auth::check() && Auth::user()->level == 1) {
             // dd($id);
-            $slide_update = Slide::where('id',$id)->first();
+            $slide_update = Slide::where('id', $id)->first();
             $slide_update->link = $req->link_slide;
             $slide_update->status_slide = $req->status_slide;
 
-            if($req->hasFile('image')){
-                if(Session::get('locale') == 'vi' || Session::get('locale') == null){
+            if ($req->hasFile('image')) {
+                if (Session::get('locale') == 'vi' || Session::get('locale') == null) {
                     $this->validate($req,
-                    [
+                        [
 
-                        'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
-                    ],
-                    [
+                            'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
+                        ],
+                        [
 
-                        // 'image.required' => 'Vui lòng chọn hình',
-                        'image.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
-                        'image.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
-                    ]);
-                }else{
+                            // 'image.required' => 'Vui lòng chọn hình',
+                            'image.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
+                            'image.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
+                        ]);
+                } else {
                     $this->validate($req,
-                    [
+                        [
 
-                        'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
-                    ]);
+                            'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
+                        ]);
                 }
 
             }
@@ -364,29 +348,33 @@ class admincontroller extends Controller
             $slide_update->save();
 
             return redirect()->route('quanlyslide')->with('thongbao', 'Cập nhật thành công!');
-        }else{
+        } else {
             return redirect()->route('trang-chu');
         }
 
     }
 
-    public function active_slide($id){
-        Slide::where('id',$id)->update(['status_slide'=>1]);
-        return redirect()->back();
-    }
-    public function unactive_slide($id){
-        Slide::where('id',$id)->update(['status_slide'=>0]);
+    public function active_slide($id)
+    {
+        Slide::where('id', $id)->update(['status_slide' => 1]);
         return redirect()->back();
     }
 
-/*-----------------------------------------------NSX--------------------------------------------------------------------*/
-    public function getQL_Nsx(Request $req){
+    public function unactive_slide($id)
+    {
+        Slide::where('id', $id)->update(['status_slide' => 0]);
+        return redirect()->back();
+    }
+
+    /*-----------------------------------------------NSX--------------------------------------------------------------------*/
+    public function getQL_Nsx(Request $req)
+    {
         if (Auth::check() && Auth::user()->level == 1) {
             $nsx = ProductType::orderBy('id', 'desc')->get();
             $url_canonical = $req->url();
 
             return view('admin.QL_Nsx', compact('nsx', 'url_canonical'));
-        }else{
+        } else {
             return redirect()->route('trang-chu');
         }
     }
@@ -408,33 +396,34 @@ class admincontroller extends Controller
         return redirect()->back()->with('thongbao', 'Xóa thành công!');
     }
 
-    public function AddAdmin_NSX(Request $req){
+    public function AddAdmin_NSX(Request $req)
+    {
         $nsx = new ProductType();
-        if(Session::get('locale') == 'vi' || Session::get('locale') == null){
+        if (Session::get('locale') == 'vi' || Session::get('locale') == null) {
             $this->validate($req,
-            [
-                'name'=>'required',
-                'image_file' => 'required|mimes:jpg,jpeg,png,gif|max:4096',
+                [
+                    'name' => 'required',
+                    'image_file' => 'required|mimes:jpg,jpeg,png,gif|max:4096',
 
-            ],
-            [
-                'name.required'=>'Vui lòng nhập tên',
-                'image_file.required'=>'Vui lòng chọn hình',
-                'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
-                'image_file.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
+                ],
+                [
+                    'name.required' => 'Vui lòng nhập tên',
+                    'image_file.required' => 'Vui lòng chọn hình',
+                    'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
+                    'image_file.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
 
 
-            ]);
-        }else{
+                ]);
+        } else {
             $this->validate($req,
-            [
-                'name'=>'required',
-                'image_file' => 'required|mimes:jpg,jpeg,png,gif|max:4096',
+                [
+                    'name' => 'required',
+                    'image_file' => 'required|mimes:jpg,jpeg,png,gif|max:4096',
 
-            ]);
+                ]);
         }
 
-        $nsx->name_type  = $req->name;
+        $nsx->name_type = $req->name;
         if ($req->hasFile('image_file')) {
             $file = $req->file('image_file');
             $get_name_img = $file->getClientOriginalName();
@@ -451,31 +440,31 @@ class admincontroller extends Controller
     }
 
 
-
-    public function postUpdateNsx(Request $req, $id){
-        if(Session::get('locale') == 'vi' || Session::get('locale') == null){
+    public function postUpdateNsx(Request $req, $id)
+    {
+        if (Session::get('locale') == 'vi' || Session::get('locale') == null) {
             $this->validate($req,
-            [
-                'name'=>'required',
-                'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
+                [
+                    'name' => 'required',
+                    'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
 
-            ],
-            [
-                'name.required'=>'Vui lòng nhập tên',
-                // 'image.required'=>'Vui lòng chọn hình',
-                'image.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
-                'image.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
+                ],
+                [
+                    'name.required' => 'Vui lòng nhập tên',
+                    // 'image.required'=>'Vui lòng chọn hình',
+                    'image.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
+                    'image.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
 
-            ]);
-        }else{
+                ]);
+        } else {
             $this->validate($req,
-            [
-                'name'=>'required',
-                'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
+                [
+                    'name' => 'required',
+                    'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
 
-            ]);
+                ]);
         }
-        $nsx_update = ProductType::where('id',$id)->first();
+        $nsx_update = ProductType::where('id', $id)->first();
 
         $nsx_update->name_type = $req->name;
 
@@ -503,8 +492,9 @@ class admincontroller extends Controller
     }
 
 
-/*-----------------------------------------------Sản-Phẩm----------------------------------------------------------------*/
-    public function getQL_Sanpham(Request $req){
+    /*-----------------------------------------------Sản-Phẩm----------------------------------------------------------------*/
+    public function getQL_Sanpham(Request $req)
+    {
         if (Auth::check() && Auth::user()->level == 1) {
 
             // dd(config('app.locale'));
@@ -523,9 +513,9 @@ class admincontroller extends Controller
             $type = ProductType::orderby('id', 'desc')->get();
 
 
-            return view('admin.QL_sanpham', compact('sanpham','sanpham1', 'type', 'nameproduct','url_canonical'));
+            return view('admin.QL_sanpham', compact('sanpham', 'sanpham1', 'type', 'nameproduct', 'url_canonical'));
 
-        }else{
+        } else {
             return redirect()->route('trang-chu');
         }
     }
@@ -541,41 +531,42 @@ class admincontroller extends Controller
         return redirect()->back()->with('thongbao', 'Xóa thành công!');
     }
 
-    public function AddAdmin_Sp(Request $req){
+    public function AddAdmin_Sp(Request $req)
+    {
         $sp = new Product();
         $nn_add = new Post();
 
-        if(Session::get('locale') == 'vi' || Session::get('locale') == null){
+        if (Session::get('locale') == 'vi' || Session::get('locale') == null) {
             $this->validate($req,
-            [
-                'quantity'=>'required',
-                'unit_price'=>'required',
-                'promotion_price'=>'required',
-                'image_file' => 'required|mimes:jpg,jpeg,png,gif|max:4096',
+                [
+                    'quantity' => 'required',
+                    'unit_price' => 'required',
+                    'promotion_price' => 'required',
+                    'image_file' => 'required|mimes:jpg,jpeg,png,gif|max:4096',
 
-            ],
-            [
-                'quantity.required'=>'Vui lòng nhập tên',
+                ],
+                [
+                    'quantity.required' => 'Vui lòng nhập tên',
 
-                'unit_price.required'=>'Vui lòng nhập số tiền',
+                    'unit_price.required' => 'Vui lòng nhập số tiền',
 
-                'promotion_price.required'=>'Vui lòng nhập số tiền khuyến mãi',
+                    'promotion_price.required' => 'Vui lòng nhập số tiền khuyến mãi',
 
-                'image_file.required' => 'Vui lòng chọn hình',
-                'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
-                'image_file.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
+                    'image_file.required' => 'Vui lòng chọn hình',
+                    'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
+                    'image_file.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
 
 
-            ]);
-        }else{
+                ]);
+        } else {
             $this->validate($req,
-            [
-                'quantity'=>'required',
-                'unit_price'=>'required',
-                'promotion_price'=>'required',
-                'image_file' => 'required|mimes:jpg,jpeg,png,gif|max:4096',
+                [
+                    'quantity' => 'required',
+                    'unit_price' => 'required',
+                    'promotion_price' => 'required',
+                    'image_file' => 'required|mimes:jpg,jpeg,png,gif|max:4096',
 
-            ]);
+                ]);
         }
 
         $nn_add->sp_vi = $req->sp_vi;
@@ -591,8 +582,8 @@ class admincontroller extends Controller
         $sp->promotion_price = $req->promotion_price;
         $sp->new = $req->new;
         $sp->product_soid = 0;
-        $sp->id_type  = $req->type;
-        $sp->date_sale  = $req->date_sale;
+        $sp->id_type = $req->type;
+        $sp->date_sale = $req->date_sale;
 
         if ($req->hasFile('image_file')) {
 
@@ -607,9 +598,8 @@ class admincontroller extends Controller
         }
 
         $detailImages = [];
-        if($req->hasFile('detail_images')){
-            foreach($req->file('detail_images') as $file)
-            {
+        if ($req->hasFile('detail_images')) {
+            foreach ($req->file('detail_images') as $file) {
                 $filename = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
 
                 $image_resize = Image::make($file->getRealPath());
@@ -626,46 +616,46 @@ class admincontroller extends Controller
     }
 
 
-
-    public function postUpdateSp(Request $req, $id){
+    public function postUpdateSp(Request $req, $id)
+    {
         if (Auth::check()) {
-            $sp_update = Product::join('post', 'products.id_post', '=', 'post.id_post')->where('id',$id)->first();
-            $up_nn = Post::where('id_post',$sp_update->id_post)->first();
+            $sp_update = Product::join('post', 'products.id_post', '=', 'post.id_post')->where('id', $id)->first();
+            $up_nn = Post::where('id_post', $sp_update->id_post)->first();
             // dd($up_nn);
-            if(Session::get('locale') == 'vi' || Session::get('locale') == null){
+            if (Session::get('locale') == 'vi' || Session::get('locale') == null) {
                 $this->validate($req,
-                [
-                    'sp_vi'=>'required',
-                    'sp_en'=>'required',
-                    'unit_price'=>'required',
-                    'promotion_price'=>'required',
-                    'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
+                    [
+                        'sp_vi' => 'required',
+                        'sp_en' => 'required',
+                        'unit_price' => 'required',
+                        'promotion_price' => 'required',
+                        'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
 
-                ],
-                [
-                    'sp_vi.required'=>'Vui lòng nhập tên Vi',
-                    'sp_en.required'=>'Vui lòng nhập tên En',
+                    ],
+                    [
+                        'sp_vi.required' => 'Vui lòng nhập tên Vi',
+                        'sp_en.required' => 'Vui lòng nhập tên En',
 
-                    'unit_price.required'=>'Vui lòng nhập số tiền',
+                        'unit_price.required' => 'Vui lòng nhập số tiền',
 
-                    'promotion_price.required'=>'Vui lòng nhập số tiền khuyến mãi',
+                        'promotion_price.required' => 'Vui lòng nhập số tiền khuyến mãi',
 
-                    // 'image.required' => 'Vui lòng chọn hình',
-                    'image.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
-                    'image.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
+                        // 'image.required' => 'Vui lòng chọn hình',
+                        'image.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
+                        'image.max' => 'Hình ảnh giới hạn dung lượng không quá 4M',
 
 
-                ]);
-            }else{
+                    ]);
+            } else {
                 $this->validate($req,
-                [
-                    'sp_vi'=>'required',
-                    'sp_en'=>'required',
-                    'unit_price'=>'required',
-                    'promotion_price'=>'required',
-                    'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
+                    [
+                        'sp_vi' => 'required',
+                        'sp_en' => 'required',
+                        'unit_price' => 'required',
+                        'promotion_price' => 'required',
+                        'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
 
-                ]);
+                    ]);
             }
 
             $up_nn->sp_vi = $req->sp_vi;
@@ -680,8 +670,8 @@ class admincontroller extends Controller
             $sp_update->new = $req->new;
             $sp_update->product_quantity = $req->quantity;
             $sp_update->product_soid = $req->product_soid;
-            $sp_update->id_type  = $req->type;
-            $sp_update->date_sale  = $req->date_sale;
+            $sp_update->id_type = $req->type;
+            $sp_update->date_sale = $req->date_sale;
 
             if ($req->hasFile('image')) {
 
@@ -699,9 +689,8 @@ class admincontroller extends Controller
 
             }
             $detailImages = [];
-            if($req->hasFile('detail_images')){
-                foreach($req->file('detail_images') as $file)
-                {
+            if ($req->hasFile('detail_images')) {
+                foreach ($req->file('detail_images') as $file) {
                     $filename = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
 
                     $image_resize = Image::make($file->getRealPath());
@@ -715,21 +704,24 @@ class admincontroller extends Controller
 
             $sp_update->save();
             return redirect()->route('quanlysanpham')->with('thongbao', 'Cập nhật thành công!');
-        }else {
+        } else {
             return redirect()->route('trang-chu');
         }
     }
 
-    public function active_sp($id){
-        Product::where('id',$id)->update(['new'=>0]);
-        return redirect()->back();
-    }
-    public function unactive_sp($id){
-        Product::where('id',$id)->update(['new'=>1]);
+    public function active_sp($id)
+    {
+        Product::where('id', $id)->update(['new' => 0]);
         return redirect()->back();
     }
 
-/*-----------------------------------------------Đơn-Hàng----------------------------------------------------------------*/
+    public function unactive_sp($id)
+    {
+        Product::where('id', $id)->update(['new' => 1]);
+        return redirect()->back();
+    }
+
+    /*-----------------------------------------------Đơn-Hàng----------------------------------------------------------------*/
 
     public function getDonHang(Request $req)
     {
@@ -740,33 +732,35 @@ class admincontroller extends Controller
             $url_canonical = $req->url();
 
 
-            return view('admin.QL_donhang', compact('donhang','url_canonical'));
+            return view('admin.QL_donhang', compact('donhang', 'url_canonical'));
 
 
         } else {
             return redirect()->route('trang-chu');
         }
     }
+
     public function getDonHang_daduyet(Request $req)
     {
         if (Auth::check()) {
 
-            $donhang_daduyet = Bill::join('customer', 'customer.id', '=', 'bills.id_customer')->where('status_bill',1)->orderby('id_bill', 'desc')->get();
+            $donhang_daduyet = Bill::join('customer', 'customer.id', '=', 'bills.id_customer')->where('status_bill', 1)->orderby('id_bill', 'desc')->get();
             $url_canonical = $req->url();
 
 
-            return view('admin.QL_donhang_daduyet', compact('donhang_daduyet','url_canonical'));
+            return view('admin.QL_donhang_daduyet', compact('donhang_daduyet', 'url_canonical'));
 
 
         } else {
             return redirect()->route('trang-chu');
         }
     }
+
     public function getDonHang_chuaduyet(Request $req)
     {
         if (Auth::check()) {
 
-            $donhang_chuaduyet = Bill::join('customer', 'customer.id', '=', 'bills.id_customer')->where('status_bill',0)->orderby('id_bill', 'desc')->get();
+            $donhang_chuaduyet = Bill::join('customer', 'customer.id', '=', 'bills.id_customer')->where('status_bill', 0)->orderby('id_bill', 'desc')->get();
             $url_canonical = $req->url();
 
 
@@ -777,15 +771,16 @@ class admincontroller extends Controller
             return redirect()->route('trang-chu');
         }
     }
+
     public function getDonHang_huy(Request $req)
     {
         if (Auth::check()) {
 
-            $donhang_huy = Bill::join('customer', 'customer.id', '=', 'bills.id_customer')->where('status_bill',2)->orderby('id_bill', 'desc')->get();
+            $donhang_huy = Bill::join('customer', 'customer.id', '=', 'bills.id_customer')->where('status_bill', 2)->orderby('id_bill', 'desc')->get();
             $url_canonical = $req->url();
 
 
-            return view('admin.QL_donhang_huy', compact('donhang_huy','url_canonical'));
+            return view('admin.QL_donhang_huy', compact('donhang_huy', 'url_canonical'));
 
 
         } else {
@@ -814,16 +809,14 @@ class admincontroller extends Controller
         if (Auth::check()) {
 
 
-            $billdetaill =DB::select("SELECT bt.id_bill_detail, bt.id_bill, bt.id_product, bt.id_post_bill_detail, bt.order_code, bt.quantity,
+            $billdetaill = DB::select("SELECT bt.id_bill_detail, bt.id_bill, bt.id_product, bt.id_post_bill_detail, bt.order_code, bt.quantity,
         bt.unit_price,p.image,p.date_sale, p.product_quantity ,p.id_post, post.sp_vi as sp_vi,  post.sp_en as sp_en
         FROM bill_detail bt, products p
         INNER JOIN post ON p.id_post = post.id_post
          WHERE bt.id_product=p.id AND id_bill=$id ");
             $url_canonical = $req->url();
 
-            $thongtin_kh = Bill::join('customer', 'customer.id', '=', 'bills.id_customer')->where('id_bill',$id)->get();
-
-
+            $thongtin_kh = Bill::join('customer', 'customer.id', '=', 'bills.id_customer')->where('id_bill', $id)->get();
 
 
             return view('admin.ChitietDH', compact('billdetaill', 'thongtin_kh', 'url_canonical'));
@@ -831,14 +824,16 @@ class admincontroller extends Controller
             return redirect()->route('trang-chu');
         }
     }
-    public function postChiTietDonHang($id, Request $req){
 
-        $qty_update = BillDetail::where('id_bill', $id)->where('order_code',$req->order_code)->first();
+    public function postChiTietDonHang($id, Request $req)
+    {
+
+        $qty_update = BillDetail::where('id_bill', $id)->where('order_code', $req->order_code)->first();
         // dd( $qty_update);
         $qty_update->quantity = $req->product_quantity_order;
         $qty_update->save();
 
-        $total_update = Bill::where('id_bill', $id)->where('order_code',$req->order_code)->first();
+        $total_update = Bill::where('id_bill', $id)->where('order_code', $req->order_code)->first();
         $total_update->total = $req->product_quantity_order * $qty_update->unit_price;
         $total_update->save();
 
@@ -846,7 +841,8 @@ class admincontroller extends Controller
     }
 
 
-    public function update_order_qty(Request $req){
+    public function update_order_qty(Request $req)
+    {
         $data = $req->all();
 
         $bill = Bill::find($data['order_id']);
@@ -854,11 +850,11 @@ class admincontroller extends Controller
         $bill->save();
 
         //order date
-        $order_date  = $bill->date_order;
-        $statistic = Statistical::where('order_date',$order_date)->get();
-        if($statistic){
+        $order_date = $bill->date_order;
+        $statistic = Statistical::where('order_date', $order_date)->get();
+        if ($statistic) {
             $statistic_count = $statistic->count();
-        }else{
+        } else {
             $statistic_count = 0;
         }
 
@@ -879,48 +875,48 @@ class admincontroller extends Controller
                 $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
                 foreach ($data['quantity'] as $key2 => $qty) {
-                    if ($key==$key2) {
+                    if ($key == $key2) {
                         $pro_remain = $product_qty - $qty;
                         $product->product_quantity = $pro_remain;
                         $product->product_soid = $product_soid + $qty;
                         $product->save();
 
                         //update doanh thu
-                        $quantity+=$qty;
-                        $total_order+=1;
-                        $sales+=$product_price*$qty;
+                        $quantity += $qty;
+                        $total_order += 1;
+                        $sales += $product_price * $qty;
                         $profit = $sales - 1000;
                     }
                 }
             }
             //update doanh so db
-            if($statistic_count > 0){
-                $statistic_update = Statistical::where('order_date',$order_date)->first();
+            if ($statistic_count > 0) {
+                $statistic_update = Statistical::where('order_date', $order_date)->first();
                 $statistic_update->sales = $statistic_update->sales + $sales;
-                $statistic_update->profit =  $statistic_update->profit + $profit;
-                $statistic_update->quantity =  $statistic_update->quantity + $quantity;
+                $statistic_update->profit = $statistic_update->profit + $profit;
+                $statistic_update->quantity = $statistic_update->quantity + $quantity;
                 $statistic_update->total_order = $statistic_update->total_order + $total_order;
                 $statistic_update->save();
 
-            }else{
+            } else {
 
                 $statistic_new = new Statistical();
                 $statistic_new->order_date = $order_date;
                 $statistic_new->sales = $sales;
-                $statistic_new->profit =  $profit;
-                $statistic_new->quantity =  $quantity;
+                $statistic_new->profit = $profit;
+                $statistic_new->quantity = $quantity;
                 $statistic_new->total_order = $total_order;
                 $statistic_new->save();
             }
-        }else if ($bill->status_bill == 0 || $bill->status_bill == 2) {
+        } else if ($bill->status_bill == 0 || $bill->status_bill == 2) {
             foreach ($data['order_product_id'] as $key => $product_id) {
                 $product = Product::find($product_id);
                 $product_qty = $product->product_quantity;
                 $product_soid = $product->product_soid;
 
-                if ($product->product_soid !=0) {
+                if ($product->product_soid != 0) {
                     foreach ($data['quantity'] as $key2 => $qty) {
-                        if ($key==$key2) {
+                        if ($key == $key2) {
                             $pro_remain = $product_qty + $qty;
                             $product->product_quantity = $pro_remain;
                             $product->product_soid = $product_soid - $qty;
@@ -933,17 +929,20 @@ class admincontroller extends Controller
 
     }
 
-    public function print_order($checkout_code){
+    public function print_order($checkout_code)
+    {
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($this->print_order_convert($checkout_code));
         return $pdf->stream();
     }
-    public function print_order_convert($checkout_code){
 
-        $billdetaill_print = BillDetail::where('order_code',$checkout_code)->join('post', 'post.id_post', 'bill_detail.id_post_bill_detail')->get();
-        $bill_print = Bill::where('order_code',$checkout_code)->get();
+    public function print_order_convert($checkout_code)
+    {
 
-        foreach($billdetaill_print as $key => $bd){
+        $billdetaill_print = BillDetail::where('order_code', $checkout_code)->join('post', 'post.id_post', 'bill_detail.id_post_bill_detail')->get();
+        $bill_print = Bill::where('order_code', $checkout_code)->get();
+
+        foreach ($billdetaill_print as $key => $bd) {
             $namepro = $bd->sp_vi;
         }
 
@@ -951,12 +950,12 @@ class admincontroller extends Controller
         $month = date('m');
         $year = date('Y');
 
-        $kh_print = Bill::join('customer', 'customer.id', '=', 'bills.id_customer')->where('order_code',$checkout_code)->first();
+        $kh_print = Bill::join('customer', 'customer.id', '=', 'bills.id_customer')->where('order_code', $checkout_code)->first();
 
         $date_order_create = date_create($kh_print->date_order);
         if ($kh_print->payment == 'ATM') {
             $kq_pay = 'Chuyển khoản';
-        }else{
+        } else {
             $kq_pay = 'Tiền mặt';
         }
 
@@ -965,23 +964,23 @@ class admincontroller extends Controller
         $soid = 1;
 
 
-        $output.='
+        $output .= '
         <meta charset="UTF-8">
         <div style="width:100%; float:left; margin: 40px 0px;font-family: DejaVu Sans; line-height: 200%; font-size:12px">
         <p style="float: right; text-align: right; padding-right:20px; line-height: 140%">
-          Ngày đặt hàng: '.date_format($date_order_create, "d-m-Y").'<br><br>
-          <span text-align: center>'.DNS2D :: getBarcodeHTML ( $tonghop, 'QRCODE',6.5,5).' </span>
+          Ngày đặt hàng: ' . date_format($date_order_create, "d-m-Y") . '<br><br>
+          <span text-align: center>' . DNS2D:: getBarcodeHTML($tonghop, 'QRCODE', 6.5, 5) . ' </span>
         </p>
         <div style="float: left; margin: 0 0 1.5em 0; ">
-         <strong style="font-size: 18px;">PhongVu</strong>
+         <strong style="font-size: 18px;">The11Laptop</strong>
           <br />
-          <strong>Địa chỉ:</strong> 1XX Bình Dương, TDM.
+          <strong>Địa chỉ:</strong> 97 Khương Trung, Thanh Xuân, Hà Nội
           <br/>
-          <strong>Điện thoại:</strong> 0773654031
+          <strong>Điện thoại:</strong> 0398786520
           <br/>
-          <strong>Website:</strong> PhongVu.demo
+          <strong>Website:</strong> vietdh.name.vn
           <br/>
-          <strong>Email:</strong> npn0208@gmail.com
+          <strong>Email:</strong> vietdtds@gmail.com
         </div>
         <div style="clear:both"></div>
         <table style="width: 100%"><tr><td valign="top" style="width: 65%">
@@ -998,31 +997,31 @@ class admincontroller extends Controller
             </tr>
           </thead>
           <tbody>';
-            foreach($billdetaill_print as $key => $bd){
-                foreach($bill_print as $key2 => $b_print){
-                    if ($kh_print->payment == 'ATM') {
-                        # code...
-                        $toto = 0;
-                    }else{
-                        $toto = number_format($bd->unit_price,0,',','.');
-                    }
-                    $output.='
-                    <tr valign="top" style="border-top: 1px solid #d9d9d9;">
-                      <td align="left" style="padding: 5px 0px">'.$soid++.'</td>
-                      <td align="left" style="padding: 5px 5px 5px 0px;white-space: pre-line;">'.$bd->sp_vi.'</td>
-                      <td align="center" style="padding: 5px 0px">'.$bd->quantity.'</td>
-                      <td align="right" style="padding: 5px 0px">'.number_format($bd->unit_price,0,',','.').'</td>
-                    </tr>';
+        foreach ($billdetaill_print as $key => $bd) {
+            foreach ($bill_print as $key2 => $b_print) {
+                if ($kh_print->payment == 'ATM') {
+                    # code...
+                    $toto = 0;
+                } else {
+                    $toto = number_format($bd->unit_price, 0, ',', '.');
                 }
+                $output .= '
+                    <tr valign="top" style="border-top: 1px solid #d9d9d9;">
+                      <td align="left" style="padding: 5px 0px">' . $soid++ . '</td>
+                      <td align="left" style="padding: 5px 5px 5px 0px;white-space: pre-line;">' . $bd->sp_vi . '</td>
+                      <td align="center" style="padding: 5px 0px">' . $bd->quantity . '</td>
+                      <td align="right" style="padding: 5px 0px">' . number_format($bd->unit_price, 0, ',', '.') . '</td>
+                    </tr>';
             }
-            $output.='
+        }
+        $output .= '
           </tbody>
         </table>
         <h3 style="font-size: 14px;margin: 0 0 1em 0;">Thông tin thanh toán</h3>
         <table style="font-size: 12px;width: 100%; margin: 0 0 1.5em 0;">
           <tr>
             <td style="padding: 5px 0px">Tổng giá sản phẩm:</td>
-            <td style="text-align:right">'.number_format($b_print->total,0,',','.').'</td>
+            <td style="text-align:right">' . number_format($b_print->total, 0, ',', '.') . '</td>
           </tr>
           <tr>
               <td style="width: 50%;padding: 5px 0px">Phí vận chuyển:</td>
@@ -1030,30 +1029,30 @@ class admincontroller extends Controller
             </tr>
           <tr>
             <td style="padding: 5px 0px"><strong>Tổng tiền:</strong></td>
-            <td style="text-align:right;padding: 5px 0px"><strong><p>'.$toto.' VNĐ</td>
+            <td style="text-align:right;padding: 5px 0px"><strong><p>' . $toto . ' VNĐ</td>
           </tr>
         </table>
         <h3 style="font-size: 14px;margin: 0 0 1em 0;">Ghi chú:</h3>
-        <p style="line-height: 30px">'.$kh_print->note.'</p>
+        <p style="line-height: 30px">' . $kh_print->note . '</p>
         </td><td valign="top" style="padding: 0px 20px">
          <h3 style="font-size: 14px;margin: 1.5em 0 1em 0;">Thông tin đơn hàng</h3>
         <hr style="border: none; border-top: 2px solid #0975BD;"/>
           <div style="margin: 0 0 1em 0; padding: 1em; border: 1px solid #d9d9d9;">
-            <strong>Mã đơn hàng:</strong><br>#'.$kh_print->order_code.'<br>
-              <strong>Ngày đặt hàng:</strong><br>'.date_format($date_order_create, "d-m-Y").'<br>
-            <strong>Phương thức thanh toán</strong><br>'.$kq_pay.'
+            <strong>Mã đơn hàng:</strong><br>#' . $kh_print->order_code . '<br>
+              <strong>Ngày đặt hàng:</strong><br>' . date_format($date_order_create, "d-m-Y") . '<br>
+            <strong>Phương thức thanh toán</strong><br>' . $kq_pay . '
             <br>
             <strong>Phương thức vận chuyển</strong><br>Shipper
           </div>
           <h3 style="font-size: 14px;margin: 1.5em 0 1em 0;">Thông tin mua hàng</h3>
         <hr style="border: none; border-top: 2px solid #0975BD;"/>
           <div style="margin: 0 0 1em 0; padding: 1em; border: 1px solid #d9d9d9;  white-space: normal;">
-            <strong>'.$kh_print->name.'</strong><br/>
-            '.$kh_print->address.'<br/>
-            Điện thoại: '.$kh_print->phone_number.'<br/>
-            Email:'.$kh_print->email.'
+            <strong>' . $kh_print->name . '</strong><br/>
+            ' . $kh_print->address . '<br/>
+            Điện thoại: ' . $kh_print->phone_number . '<br/>
+            Email:' . $kh_print->email . '
           </div>
-        </td></tr></table><br/><br/><br/><p>Nếu bạn có thắc mắc, vui lòng liên hệ chúng tôi qua email <u>npn0208@gmail.com</u> hoặc 0773654031</p></div>
+        </td></tr></table><br/><br/><br/><p>Nếu bạn có thắc mắc, vui lòng liên hệ chúng tôi qua email <u>vietdtds@gmail.com</u> hoặc 0398786520</p></div>
         ';
 
         return $output;
@@ -1062,51 +1061,51 @@ class admincontroller extends Controller
     }
 
 
+    /*-----------------------------------------------Lang---------------------------------------------------------------*/
 
-
-
-/*-----------------------------------------------Lang---------------------------------------------------------------*/
-
-    public function getQL_NN(Request $req){
+    public function getQL_NN(Request $req)
+    {
         if (Auth::check() && Auth::user()->level == 1) {
             $ngonngu = Post::all();
             $url_canonical = $req->url();
 
 
-            return view('admin.QL_post', compact('ngonngu','url_canonical'));
-        }else{
+            return view('admin.QL_post', compact('ngonngu', 'url_canonical'));
+        } else {
             return redirect()->route('trang-chu');
         }
     }
-    public function AddAdmin_NN(Request $req){
+
+    public function AddAdmin_NN(Request $req)
+    {
         $addnn = new Post();
-        if(Session::get('locale') == 'vi' || Session::get('locale') == null){
+        if (Session::get('locale') == 'vi' || Session::get('locale') == null) {
             $this->validate($req,
-            [
-                'sp_vi'=>'required',
-                'sp_en'=>'required',
+                [
+                    'sp_vi' => 'required',
+                    'sp_en' => 'required',
 
-            ],
-            [
-                'sp_vi.required'=>'Vui lòng nhập vi',
-                'sp_en.required'=>'Vui lòng nhập en',
+                ],
+                [
+                    'sp_vi.required' => 'Vui lòng nhập vi',
+                    'sp_en.required' => 'Vui lòng nhập en',
 
 
-            ]);
-        }else{
+                ]);
+        } else {
             $this->validate($req,
-            [
-                'sp_vi'=>'required',
-                'sp_en'=>'required',
+                [
+                    'sp_vi' => 'required',
+                    'sp_en' => 'required',
 
-            ]);
+                ]);
         }
 
-        $addnn->sp_vi  = $req->sp_vi;
-        $addnn->sp_en  = $req->sp_en;
-        $addnn->description_vi  = $req->description_vi;
-        $addnn->description_en  = $req->description_en;
-        $addnn->product_slug  = $req->slug;
+        $addnn->sp_vi = $req->sp_vi;
+        $addnn->sp_en = $req->sp_en;
+        $addnn->description_vi = $req->description_vi;
+        $addnn->description_en = $req->description_en;
+        $addnn->product_slug = $req->slug;
 
         $addnn->save();
         return redirect()->route('quanlynn')->with('thongbao', 'Thêm mới thành công');
@@ -1120,52 +1119,52 @@ class admincontroller extends Controller
     }
 
 
-
-    public function postUpdateNn(Request $req, $id){
+    public function postUpdateNn(Request $req, $id)
+    {
         if (Auth::check()) {
-            if(Session::get('locale') == 'vi' || Session::get('locale') == null){
+            if (Session::get('locale') == 'vi' || Session::get('locale') == null) {
                 $this->validate($req,
-                [
-                    'sp_vi'=>'required',
-                    'sp_en'=>'required',
+                    [
+                        'sp_vi' => 'required',
+                        'sp_en' => 'required',
 
-                ],
-                [
+                    ],
+                    [
 
-                    'sp_vi.required'=>'Vui lòng nhập tên vi',
-                    'sp_en.required'=>'Vui lòng nhập tên en',
-                ]);
-            }else{
+                        'sp_vi.required' => 'Vui lòng nhập tên vi',
+                        'sp_en.required' => 'Vui lòng nhập tên en',
+                    ]);
+            } else {
                 $this->validate($req,
-                [
-                    'sp_vi'=>'required',
-                    'sp_en'=>'required',
+                    [
+                        'sp_vi' => 'required',
+                        'sp_en' => 'required',
 
-                ]);
+                    ]);
             }
-            $updatenn = Post::where('id_post',$id)->first();
+            $updatenn = Post::where('id_post', $id)->first();
             $updatenn->sp_vi = $req->sp_vi;
             $updatenn->sp_en = $req->sp_en;
-            $updatenn->description_vi  = $req->description_vi;
-            $updatenn->description_en  = $req->description_en;
+            $updatenn->description_vi = $req->description_vi;
+            $updatenn->description_en = $req->description_en;
             $updatenn->product_slug = $req->slug;
 
 
             $updatenn->save();
             return redirect()->route('quanlynn')->with('thongbao', 'Cập nhật thành công');
-        }else {
+        } else {
             return redirect()->route('trang-chu');
         }
     }
 
 
-
-    public function filter_by_date(Request $req){
+    public function filter_by_date(Request $req)
+    {
         $data = $req->all();
         $from_date = $data['from_date'];
         $to_date = $data['to_date'];
 
-        $get = Statistical::whereBetween('order_date', [$from_date,$to_date])->orderBy('order_date','ASC')->get();
+        $get = Statistical::whereBetween('order_date', [$from_date, $to_date])->orderBy('order_date', 'ASC')->get();
 
         foreach ($get as $key => $val) {
             $chart_data[] = array(
@@ -1180,7 +1179,8 @@ class admincontroller extends Controller
         echo $data = json_encode($chart_data);
     }
 
-    public function dashboard_filter(Request $req){
+    public function dashboard_filter(Request $req)
+    {
         $data = $req->all();
         // echo $today = Carbon::now('Asia/Ho_Chi_Minh');
         $dauthangnay = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
@@ -1192,344 +1192,49 @@ class admincontroller extends Controller
 
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
-        if ($data['dashboard_value']=='7ngay') {
-            $get = Statistical::whereBetween('order_date', [$sub7ngay,$now])->orderBy('order_date','ASC')->get();
+        if ($data['dashboard_value'] == '7ngay') {
+            $get = Statistical::whereBetween('order_date', [$sub7ngay, $now])->orderBy('order_date', 'ASC')->get();
 
-        }elseif ($data['dashboard_value']=='thangtruoc') {
-            $get = Statistical::whereBetween('order_date', [$dau_thangtruoc,$cuoi_thangtruoc])->orderBy('order_date','ASC')->get();
+        } elseif ($data['dashboard_value'] == 'thangtruoc') {
+            $get = Statistical::whereBetween('order_date', [$dau_thangtruoc, $cuoi_thangtruoc])->orderBy('order_date', 'ASC')->get();
 
-        }elseif ($data['dashboard_value']=='thangnay') {
-            $get = Statistical::whereBetween('order_date', [$dauthangnay,$now])->orderBy('order_date','ASC')->get();
-
-        }else{
-            $get = Statistical::whereBetween('order_date', [$sub365ngay,$now])->orderBy('order_date','ASC')->get();
-
-        }
-
-        foreach ($get as $key => $val) {
-            $chart_data[] = array(
-                'period' => $val->order_date,
-                'order' => $val->total_order,
-                'sales' => $val->sales,
-                'profit' => $val->profit,
-                'quantity' => $val->quantity
-            );
-        }
-        echo $data = json_encode($chart_data);
-
-
-    }
-
-    public function days_order(){
-        $sub30ngay = Carbon::now('Asia/Ho_Chi_Minh')->subdays(40)->toDateString();
-        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-        $get = Statistical::whereBetween('order_date', [$sub30ngay,$now])->orderBy('order_date','ASC')->get();
-
-        foreach ($get as $key => $val) {
-            $chart_data[] = array(
-                'period' => $val->order_date,
-                'order' => $val->total_order,
-                'sales' => $val->sales,
-                'profit' => $val->profit,
-                'quantity' => $val->quantity
-            );
-        }
-        echo $data = json_encode($chart_data);
-    }
-
-    // coupon
-    public function getCoupon(Request $req){
-
-        if (Auth::check()) {
-
-            $month_now = Carbon::now('Asia/Ho_Chi_Minh')->month;
-            $day_now = Carbon::now('Asia/Ho_Chi_Minh')->day;
-            $year_now = Carbon::now('Asia/Ho_Chi_Minh')->year;
-
-
-            $coupon = Coupon::orderBy('coupon_id', 'desc')->get();
-            $today =  Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
-            $coupon_send_new = Coupon::where('coupon_status', 0)->where('coupon_date_end', '>=', $today)->first();
-            $url_canonical = $req->url();
-            $sendcou = Coupon::where('coupon_status',0)->get();
-
-            return view('admin.QL_coupon', compact('coupon', 'today', 'coupon_send_new','url_canonical','month_now','day_now','year_now','sendcou'));
-
+        } elseif ($data['dashboard_value'] == 'thangnay') {
+            $get = Statistical::whereBetween('order_date', [$dauthangnay, $now])->orderBy('order_date', 'ASC')->get();
 
         } else {
-            return redirect()->route('trang-chu');
-        }
-    }
+            $get = Statistical::whereBetween('order_date', [$sub365ngay, $now])->orderBy('order_date', 'ASC')->get();
 
-    public function AddAdmin_Coupon(Request $req){
-        $addcoupon = new Coupon();
-        if(Session::get('locale') == 'vi' || Session::get('locale') == null){
-            $this->validate($req,
-            [
-                'coupon_time'=>'required',
-                'coupon_number'=>'required',
-                'coupon_code'=>'required|unique:coupon,coupon_code',
-
-            ],
-            [
-                'coupon_time.required'=>'Vui lòng nhập coupon_time',
-                'coupon_number.required'=>'Vui lòng nhập coupon_number',
-                'coupon_code.required'=>'Vui lòng nhập coupon_code',
-                'coupon_code.unique'=>'coupon_code đã tồn tại',
-
-            ]);
-        }else{
-            $this->validate($req,
-            [
-                'coupon_time'=>'required',
-                'coupon_number'=>'required',
-                'coupon_code'=>'required|unique:coupon,coupon_code',
-
-            ]);
         }
 
-        $addcoupon->coupon_name  = $req->coupon_name;
-        $addcoupon->coupon_qty  = $req->coupon_time;
-        $addcoupon->coupon_number  = $req->coupon_number;
-        $addcoupon->coupon_code  = $req->coupon_code;
-        $addcoupon->coupon_condition  = $req->coupon_condition;
-        $addcoupon->coupon_date_start  = $req->coupon_date_start;
-        $addcoupon->coupon_date_end  = $req->coupon_date_end;
-        $addcoupon->coupon_status  = $req=0;
+        foreach ($get as $key => $val) {
+            $chart_data[] = array(
+                'period' => $val->order_date,
+                'order' => $val->total_order,
+                'sales' => $val->sales,
+                'profit' => $val->profit,
+                'quantity' => $val->quantity
+            );
+        }
+        echo $data = json_encode($chart_data);
 
-        $addcoupon->save();
-        return redirect()->route('quanlycoupon')->with('thongbao', 'Thêm mới thành công!');
+
     }
 
-    public function DelAdmin_Coupon($id)
+    public function days_order()
     {
-        $delcoupon = Coupon::where('coupon_id', $id)->delete();
+        $sub30ngay = Carbon::now('Asia/Ho_Chi_Minh')->subdays(40)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+        $get = Statistical::whereBetween('order_date', [$sub30ngay, $now])->orderBy('order_date', 'ASC')->get();
 
-
-        return redirect()->back()->with('thongbao', 'Xóa thành công!');
-    }
-
-
-
-    public function postUpdate_Coupon(Request $req, $id){
-        if (Auth::check()) {
-            if(Session::get('locale') == 'vi' || Session::get('locale') == null){
-                $this->validate($req,
-                [
-                    'coupon_time'=>'required',
-                    'coupon_number'=>'required',
-                    'coupon_code'=>'required',
-
-                ],
-                [
-                    'coupon_time.required'=>'Vui lòng nhập coupon_time',
-                    'coupon_number.required'=>'Vui lòng nhập coupon_number',
-                    'coupon_code.required'=>'Vui lòng nhập coupon_code',
-                    // 'coupon_code.unique'=>'coupon_code đã tồn tại',
-
-                ]);
-            }else{
-                $this->validate($req,
-                [
-                    'coupon_time'=>'required',
-                    'coupon_number'=>'required',
-                    'coupon_code'=>'required',
-
-                ]);
-            }
-            $update_cp = Coupon::where('coupon_id',$id)->first();
-            $update_cp->coupon_name  = $req->coupon_name;
-            $update_cp->coupon_qty  = $req->coupon_time;
-            $update_cp->coupon_number  = $req->coupon_number;
-            $update_cp->coupon_code  = $req->coupon_code;
-            $update_cp->coupon_condition  = $req->coupon_condition;
-            $update_cp->coupon_date_start  = $req->coupon_date_start;
-            $update_cp->coupon_date_end  = $req->coupon_date_end;
-            $update_cp->coupon_status  = $req=0;
-
-
-            $update_cp->save();
-            return redirect()->route('quanlycoupon')->with('thongbao', 'Cập nhật -'.$update_cp->coupon_name.'- thành công!');
-        }else {
-            return redirect()->route('trang-chu');
+        foreach ($get as $key => $val) {
+            $chart_data[] = array(
+                'period' => $val->order_date,
+                'order' => $val->total_order,
+                'sales' => $val->sales,
+                'profit' => $val->profit,
+                'quantity' => $val->quantity
+            );
         }
+        echo $data = json_encode($chart_data);
     }
-
-    public function send_coupon(){
-        $user_coupon = User::where('level', 2)->get();
-        $today =  Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
-        $coupon_send_new = Coupon::where('coupon_code', request()->code_cou)->first();
-        $now_send = date('d-m-Y H:i:s');
-        $to_email =  "npn020899@gmail.com";
-        $title_mail = "Mã Khuyến Mãi".' '.$now_send;
-
-        $data = [];
-        foreach ($user_coupon as $key => $send) {
-            $data['email'][] = $send->email;
-        }
-        $coupon_array =  array(
-            'coupon_send_new' => $coupon_send_new,
-        );
-
-        Mail::send('email.send_mail_coupon', ['coupon_array'=>$coupon_array]  ,function($message) use ($title_mail, $data, $to_email){
-            $message->to($data['email'])->subject($title_mail);
-            $message->from($to_email, $title_mail);
-        });
-
-        return redirect()->back()->with('thongbao', 'Gửi mã giảm giá thành công!');
-    }
-
-    public function active_coupon($id){
-        Coupon::where('coupon_id',$id)->update(['coupon_status'=>0]);
-        return redirect()->back();
-    }
-    public function unactive_coupon($id){
-        Coupon::where('coupon_id',$id)->update(['coupon_status'=>1]);
-        return redirect()->back();
-    }
-
-
-
-// -----------------------------------------------------------Excel---------------------------------------------------
-
-    //coupon
-    public function export_excel_coupon(){
-        return Excel::download(new ExportCoupon , 'coupon.xlsx');
-    }
-    public function import_excel_coupon(Request $req){
-
-        $file = $req->file('file')->getRealPath();
-        $import = new ImportCoupon;
-        $import->import($file);
-
-        if ($import->failures()->isNotEmpty()) {
-            return back()->withFailures($import->failures());
-        }
-
-        return back()->with('thongbao', 'Cập nhật thành công!');
-    }
-
-    //lang
-    public function export_excel_lang(){
-        return Excel::download(new ExportPost , 'post.xlsx');
-    }
-    public function import_excel_lang(Request $req){
-        if(Session::get('locale') == 'vi' || Session::get('locale') == null){
-            $resuft_tb = trans('home_ad.importexcel', [], 'vi');
-
-        }else{
-            $resuft_tb = trans('home_ad.importexcel', [], 'en');
-        }
-        $file = $req->file('file')->getRealPath();
-        $import = new ImportPost;
-        $import->import($file);
-
-        if ($import->failures()->isNotEmpty()) {
-            return back()->withFailures($import->failures());
-        }
-        return back()->with('thongbao', ''.$resuft_tb.'');
-    }
-
-    //slide
-    public function export_excel_slide(){
-        return Excel::download(new ExportSlide , 'slide.xlsx');
-    }
-    public function import_excel_slide(Request $req){
-        if(Session::get('locale') == 'vi' || Session::get('locale') == null){
-            $resuft_tb = trans('home_ad.importexcel', [], 'vi');
-
-        }else{
-            $resuft_tb = trans('home_ad.importexcel', [], 'en');
-        }
-        $file = $req->file('file')->getRealPath();
-        $import = new ImportSlide;
-        $import->import($file);
-
-        if ($import->failures()->isNotEmpty()) {
-            return back()->withFailures($import->failures());
-        }
-
-        return back()->with('thongbao', ''.$resuft_tb.'');
-    }
-
-    //nsx
-    public function export_excel_nsx(){
-        return Excel::download(new ExportNsx , 'type_products.xlsx');
-    }
-    public function import_excel_nsx(Request $req){
-
-        if(Session::get('locale') == 'vi' || Session::get('locale') == null){
-            $resuft_tb = trans('home_ad.importexcel', [], 'vi');
-
-        }else{
-            $resuft_tb = trans('home_ad.importexcel', [], 'en');
-        }
-        $file = $req->file('file')->getRealPath();
-        $import = new ImportNsx;
-        $import->import($file);
-
-        if ($import->failures()->isNotEmpty()) {
-            return back()->withFailures($import->failures());
-        }
-
-        return back()->with('thongbao', ''.$resuft_tb.'');
-    }
-
-    //san pham
-    public function export_excel_product(){
-        return Excel::download(new ExportProduct , 'products.xlsx');
-    }
-    // public function import_excel_product(Request $req){
-    //     $path = $req->file('file')->getRealPath();
-    //     Excel::import(new ImportProduct, $path);
-    //     return back()->with('thongbaoupdate', 'Update Successful');
-    // }
-
-
-    //don hang
-    public function export_excel_dh(){
-        return Excel::download(new ExportOrder , 'Order.xlsx');
-    }
-    //don hang da duyet
-    public function export_excel_dh_da_duyet(){
-        return Excel::download(new ExportOrderApproved , 'OrderApproved.xlsx');
-    }
-    //don hang chua duyet
-    public function export_excel_dh_chua_duyet(){
-        return Excel::download(new ExportOrderUnapproved , 'OrderUnapproved.xlsx');
-    }
-    //don hang huy
-    public function export_excel_dh_huy(){
-        return Excel::download(new ExportOrderCancel , 'OrderCancel.xlsx');
-    }
-
-    // nhap xuat tai khoan
-    public function import_account(Request $req){
-
-        if(Session::get('locale') == 'vi' || Session::get('locale') == null){
-            $resuft_tb = trans('home_ad.importexcel', [], 'vi');
-
-        }else{
-            $resuft_tb = trans('home_ad.importexcel', [], 'en');
-        }
-        $file = $req->file('file')->getRealPath();
-        $import = new ImportAccount;
-        $import->import($file);
-
-        if ($import->failures()->isNotEmpty()) {
-            return back()->withFailures($import->failures());
-        }
-
-        return back()->with('thongbao', ''.$resuft_tb.'');
-    }
-    public function export_excel_all_account(){
-        return Excel::download(new ExportAllAccount , 'users.xlsx');
-    }
-    public function export_admin_account(){
-        return Excel::download(new ExportAdminAccount , 'users_admin.xlsx');
-    }
-    public function export_excel_user_account(){
-        return Excel::download(new ExportUserAccount , 'users_user.xlsx');
-    }
-
 }

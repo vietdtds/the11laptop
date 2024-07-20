@@ -38,8 +38,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                {{ trans('home_ad.number_order') }}</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$dh_count}}</div>
+                                {{ trans('home_ad.slide_count') }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$slide_count}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
