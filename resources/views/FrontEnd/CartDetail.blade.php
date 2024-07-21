@@ -119,7 +119,7 @@
 												</span>
                                         	</td>
                                         </tr>
-                                        <tr class="cart-subtotal">
+                                       {{-- <tr class="cart-subtotal">
                                         	<th>Coupon</th>
                                         	<td>
                                         		@foreach(Session::get('coupon') as $key => $coun)
@@ -130,7 +130,7 @@
 													@endif
 												@endforeach
 											</td>
-                                        </tr>
+                                        </tr>--}}
                                         @else
                                         <tr class="cart-subtotal">
                                             <th>{{trans('home.subtotal')}}</th>

@@ -192,20 +192,6 @@
                 </a>
             </li>
 
-            {{--  <li class="@if (Request::url() == route('quanlynn')) nav-item active  @else nav-item @endif">
-                <a class="nav-link"  href="{{route('quanlynn')}}">
-                    <i class="fas fa-language"></i>
-                    <span>{{ trans('home_ad.ql_lang') }}</span>
-                </a>
-            </li>  --}}
-
-{{--            <li class="@if (Request::url() == route('quanlycoupon')) nav-item active  @else nav-item @endif">--}}
-{{--                <a class="nav-link"  href="{{route('quanlycoupon')}}">--}}
-{{--                    <i class="fab fa-discourse"></i>--}}
-{{--                    <span>{{ trans('home_ad.ql_coupon') }}</span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
-
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

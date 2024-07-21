@@ -56,10 +56,6 @@
                             <p class="lost-password"><a href="{{url('/quen-mat-khau')}}">{{ trans('home.forgot') }}</a></p>
 
                             <input type="submit" value="{{trans('home.signin')}}" class="return-customer-btn" style="width: 100%;height: 45px;">
-{{--                            <p style="text-align: center;margin-top: 10px; margin-bottom: -7px;">Or</p>--}}
-{{--                            <div>--}}
-{{--                            <p class="return-customer-btn google"><a href="{{url('/login-google')}}"><img style="margin-right: 15px; padding-bottom: 3px" width="30px" height="30px" src="{{asset('source/assets/frontend/img/icon/icon-google.png')}}" alt="GOOGLE">Google</a></p>--}}
-{{--                            </div>--}}
 
                         </form>
                         <style type="text/css">
