@@ -19,7 +19,7 @@
             </table>
         </div>
         <div class="card-body">
-            <div class="table-responsive class-product">
+            <div class="table-responsive class-product" style="overflow-x: scroll !important;">
 
                 <div class="scroll-table">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
