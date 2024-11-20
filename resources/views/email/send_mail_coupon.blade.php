@@ -51,7 +51,7 @@
 			@else
 				{{number_format($coupon_array['coupon_send_new']['coupon_number'],0,',','.')}} VNĐ
 			@endif cho tổng đơn hàng trên 2 triệu</i></b></h2>
-			<p>Quý khách đã từng mua hàng tại shop <a href="{{ route('trang-chu') }}" target="_blank">Shop The11Laptop</a> nếu đã có tài khoản xin vui lòng <a href="{{ route('dangnhap') }}" target="_blank" style="color: red">Đăng Nhập</a> vào tài khoản để mua hàng và nhập mã code phía dưới để được giảm giá mua hàng, xin cảm ơn quý khách. Chúc quý khách thật nhiều sức khỏe và bình an trong cuộc sống.  </p>
+			<p>Quý khách đã từng mua hàng tại shop <a href="{{ route('trang-chu') }}" target="_blank">Shop TSMobile</a> nếu đã có tài khoản xin vui lòng <a href="{{ route('dangnhap') }}" target="_blank" style="color: red">Đăng Nhập</a> vào tài khoản để mua hàng và nhập mã code phía dưới để được giảm giá mua hàng, xin cảm ơn quý khách. Chúc quý khách thật nhiều sức khỏe và bình an trong cuộc sống.  </p>
 
 		</div>
 		<div class="container">

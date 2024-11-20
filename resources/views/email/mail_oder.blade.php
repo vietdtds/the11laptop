@@ -43,7 +43,7 @@
                                 <tr>
                                     <td align="left" valign="middle" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;padding:0 10px 20px 10px;line-height:17px">
                                         Chào bạn, <b>{{$shipping_array['name']}}</b>,
-                                        <br> Cảm ơn bạn đã mua sắm tại Shop The11Laptop
+                                        <br> Cảm ơn bạn đã mua sắm tại Shop TSMobile
                                         <br>
                                         <br> Đơn hàng của bạn đang
                                         <b>chờ shop</b>
@@ -166,7 +166,7 @@
                                         <br> Nếu có bất kỳ thắc mắc hay cần giúp đỡ, Bạn vui lòng ghé thăm
                                         <b style="font-family:Arial,Helvetica,sans-serif;font-size:13px;text-decoration:none;font-weight:bold">Trung tâm trợ giúp</b> của chúng tôi tại địa chỉ:
                                         <a href="{{route('lienhe')}}" style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#0066cc;text-decoration:none;font-weight:bold" target="_blank">
-                                            help.the11laptop.vn
+                                            help.TSMobile.vn
                                         </a>
                                     </td>
                                 </tr>

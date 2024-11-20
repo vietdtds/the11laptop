@@ -155,7 +155,7 @@
                 <!-- Single Footer Start -->
                 <div class="col-lg-2 col-md-4 col-sm-6">
                     <div class="single-footer mb-sm-40">
-                        <h3 class="footer-title">THE11LAPTOP</h3>
+                        <h3 class="footer-title">TSMobile</h3>
                         <div class="footer-content">
                             <ul class="footer-list">
                                 <li><a href="{{route('gioithieu')}}">{{trans('home.about')}}</a></li>
@@ -264,7 +264,7 @@
         <div class="container">
 
              <div class="copyright-text text-center">
-                <p>© 2024 <a target="_blank" href="#">The11Laptop</a> Công ty trách nhiệm hữu hạn một thành viên</p>
+                <p>© 2024 <a target="_blank" href="#">TSMobile</a> Công ty trách nhiệm hữu hạn một thành viên</p>
              </div>
         </div>
         <!-- Container End -->

@@ -972,7 +972,7 @@ class admincontroller extends Controller
           <span text-align: center>' . DNS2D:: getBarcodeHTML($tonghop, 'QRCODE', 6.5, 5) . ' </span>
         </p>
         <div style="float: left; margin: 0 0 1.5em 0; ">
-         <strong style="font-size: 18px;">The11Laptop</strong>
+         <strong style="font-size: 18px;">TSMobile</strong>
           <br />
           <strong>Địa chỉ:</strong> 97 Khương Trung, Thanh Xuân, Hà Nội
           <br/>

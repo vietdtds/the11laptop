@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>@yield('title') || The11Laptop</title>
+    <title>@yield('title') || TSMobile</title>
     @include('FrontEnd.Style.Link')
 
 </head>

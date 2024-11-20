@@ -44,7 +44,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-dragon"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Admin The11Laptop</div>
+                <div class="sidebar-brand-text mx-3">Admin TSMobile</div>
             </a>
 
             <!-- Divider -->

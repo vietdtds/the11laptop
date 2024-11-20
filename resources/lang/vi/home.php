@@ -142,7 +142,7 @@ return [
 
 	// 'stylesfound' => 'tìm thấy'
 
-    //The11Laptop
+    //TSMobile
     'Delivery Information' => 'Thông tin giao hàng',
     'Privacy Policy' => 'Chính sách bảo mật',
     'Terms & Conditions' => 'Điều khoản và điều kiện',

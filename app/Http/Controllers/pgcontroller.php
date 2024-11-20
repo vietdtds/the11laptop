@@ -256,7 +256,7 @@ class pgcontroller extends Controller
         $to_email = "npn020899@gmail.com";
 
         $now = Carbon::now('Asia/Ho_Chi_Minh');
-        $tile_mail = "Liên hệ từ The11Laptop" . ' ' . $now;
+        $tile_mail = "Liên hệ từ TSMobile" . ' ' . $now;
         $data['email'] = $req->email;
 
         $name_mail = $req->name;
