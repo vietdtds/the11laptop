@@ -37,20 +37,6 @@
                             <th>{{ trans('Ql_sp.sua_xoa') }}</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>STT</th>
-                            <th>{{ trans('Ql_sp.tensp') }}</th>
-                            <th>{{ trans('Ql_sp.soluong') }}</th>
-                            <th>{{ trans('Ql_sp.mota') }}</th>
-                            <th>{{ trans('Ql_sp.gia') }}</th>
-                            <th>{{ trans('Ql_sp.giauudai') }}</th>
-                            <th>{{ trans('Ql_sp.hinhanh') }}</th>
-                            <th>{{ trans('Ql_sp.hieusp') }}</th>
-                            <th>{{ trans('Ql_sp.new_top') }}</th>
-                            <th>{{ trans('Ql_sp.sua_xoa') }}</th>
-                        </tr>
-                    </tfoot>
                     <tbody style="text-align: center;">
                     @foreach($sanpham1 as $key => $sp)
                        <tr>
