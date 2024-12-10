@@ -86,18 +86,18 @@
                             <th>{{ trans('Ql_sp.sua_xoa') }}</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>STT</th>
-                            <th>{{ trans('Ql_sp.tenkh') }}</th>
-                            <th>Email </th>
-                            <th>{{ trans('Ql_sp.sdt') }}</th>
-                            <th>{{ trans('Ql_sp.diachi') }}</th>
-                            <th>{{ trans('Ql_sp.quyenhan') }}</th>
-                            <!-- <th>{{ trans('Ql_sp.tenkh') }}</th> -->
-                            <th>{{ trans('Ql_sp.sua_xoa') }}</th>
-                        </tr>
-                    </tfoot>
+{{--                    <tfoot>--}}
+{{--                        <tr>--}}
+{{--                            <th>STT</th>--}}
+{{--                            <th>{{ trans('Ql_sp.tenkh') }}</th>--}}
+{{--                            <th>Email </th>--}}
+{{--                            <th>{{ trans('Ql_sp.sdt') }}</th>--}}
+{{--                            <th>{{ trans('Ql_sp.diachi') }}</th>--}}
+{{--                            <th>{{ trans('Ql_sp.quyenhan') }}</th>--}}
+{{--                            <!-- <th>{{ trans('Ql_sp.tenkh') }}</th> -->--}}
+{{--                            <th>{{ trans('Ql_sp.sua_xoa') }}</th>--}}
+{{--                        </tr>--}}
+{{--                    </tfoot>--}}
                     <br>
                     <tbody style="text-align: center;">
                         @foreach($user as $key => $usr)

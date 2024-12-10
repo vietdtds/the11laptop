@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="sidebar-img mb-all-30">
-                        <img src="{{asset('source/assets/frontend/img/blog/vietdh.jpg')}}" alt="single-blog-img">
+                        <img src="{{asset('source/assets/frontend/img/blog/gioi-thieu-tsmobile.png')}}" alt="single-blog-img">
                     </div>
                 </div>
                 <div class="col-lg-6">

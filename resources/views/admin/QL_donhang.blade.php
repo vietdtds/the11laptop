@@ -38,25 +38,25 @@
                             <th>{{ trans('Ql_sp.sua_xoa') }}</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>STT </th>
-                            <th>{{ trans('Ql_sp.tenkh') }}</th>
+{{--                    <tfoot>--}}
+{{--                        <tr>--}}
+{{--                            <th>STT </th>--}}
+{{--                            <th>{{ trans('Ql_sp.tenkh') }}</th>--}}
 
-                            <th>Email</th>
-                            <th>{{ trans('Ql_sp.pay') }}</th>
-                            <!-- <th style="width: 15em;word-wrap:break-word;">Address</th> -->
-                            <!-- <th>Phone Number</th> -->
-                            <th>{{ trans('home_ad.codeorder') }}</th>
+{{--                            <th>Email</th>--}}
+{{--                            <th>{{ trans('Ql_sp.pay') }}</th>--}}
+{{--                            <!-- <th style="width: 15em;word-wrap:break-word;">Address</th> -->--}}
+{{--                            <!-- <th>Phone Number</th> -->--}}
+{{--                            <th>{{ trans('home_ad.codeorder') }}</th>--}}
 
-                            <th>{{ trans('Ql_sp.trangthai') }}</th>
-                           <!--  <th>Created At </th>
-                            <th>Total Money</th>
-                            <th>Payment Methods</th>
-                            <th>Note</th> -->
-                            <th>{{ trans('Ql_sp.sua_xoa') }}</th>
-                        </tr>
-                    </tfoot>
+{{--                            <th>{{ trans('Ql_sp.trangthai') }}</th>--}}
+{{--                           <!--  <th>Created At </th>--}}
+{{--                            <th>Total Money</th>--}}
+{{--                            <th>Payment Methods</th>--}}
+{{--                            <th>Note</th> -->--}}
+{{--                            <th>{{ trans('Ql_sp.sua_xoa') }}</th>--}}
+{{--                        </tr>--}}
+{{--                    </tfoot>--}}
                     <tbody>
                         @foreach($donhang as $key => $dh)
                         <tr>

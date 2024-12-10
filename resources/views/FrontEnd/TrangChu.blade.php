@@ -141,53 +141,53 @@
 
 
     <!-- Big Banner Start Here -->
-    <div class="big-banner mt-100 pb-85 mt-sm-60 pb-sm-45">
-        <div class="container banner-2">
-            <div class="banner-box">
-                <div class="col-img" style="width: 224px; height: 174.44px">
-                    <a href="#"><img width="224px" height="174.44px"
-                            src="https://lh3.googleusercontent.com/HV9Xh3UKxVixtsPVJOVRi0qlNtYSLWn62eb1WvYwlmPNUpH803EhwCSsUiAUT8VBd3ma-daR0WClHZW7IFjgBzQ-1HUZhHTD=w300-rw" alt="banner 3"></a>
-                </div>
-                <div class="col-img" style="width: 224px; height: 174.44px">
-                    <a href="#"><img width="224px" height="174.44px"
-                            src="{{ asset('source/assets/frontend/img/banner/uudai01.jpg') }}" alt="banner 3"></a>
-                </div>
-            </div>
-            <div class="banner-box">
-                <div class="col-img" style="width: 224px; height: 359.79px">
-                    <a href="#"><img width="224px" height="359.79px"
-                            src="https://lh3.googleusercontent.com/MAp_kIA2zHy8LpCAHOFXqWID6ZQu5SlebPq4Nafktu0zixFfuFdUtgvVnl2XQ1cTFVB5pRTct7unjJ--fmucvY3LoB4SOQJr" alt="banner 3"></a>
-                </div>
-            </div>
-            <div class="banner-box">
-                <div class="col-img" style="width: 224px; height: 174.44px">
-                    <a href="#"><img width="224px" height="174.44px"
-                            src="{{ asset('source/assets/frontend/img/banner/uudai02.png') }}" alt="banner 3"></a>
-                </div>
-                <div class="col-img" style="width: 224px; height: 174.44px">
-                    <a href="#"><img width="224px" height="174.44px"
-                            src="{{ asset('source/assets/frontend/img/banner/uudai03.jpg') }}" alt="banner 3"></a>
-                </div>
-            </div>
-            <div class="banner-box">
-                <div class="col-img" style="width: 224px; height: 359.79px">
-                    <a href="#"><img width="224px" height="359.79px"
-                            src="https://lh3.googleusercontent.com/0U65LCgsBBtls6MDCPOjpSS3YIb7G05a9OlysJWXe1NYCo0RTR6oRP4giE4pesfTu6txbL4kNtKJWucP32Fx5HHxc-ljNYk" alt="banner 3"></a>
-                </div>
-            </div>
-            <div class="banner-box">
-                <div class="col-img" style="width: 224px; height: 174.44px">
-                    <a href="#"><img width="224px" height="174.44px"
-                            src="{{ asset('source/assets/frontend/img/banner/uudai04.jpg') }}" alt="banner 3"></a>
-                </div>
-                <div class="col-img" style="width: 224px; height: 174.44px">
-                    <a href="#"><img width="224px" height="174.44px"
-                            src="{{ asset('source/assets/frontend/img/banner/uudai05.jpg') }}" alt="banner 3"></a>
-                </div>
-            </div>
-        </div>
-        <!-- Container End -->
-    </div>
+{{--    <div class="big-banner mt-100 pb-85 mt-sm-60 pb-sm-45">--}}
+{{--        <div class="container banner-2">--}}
+{{--            <div class="banner-box">--}}
+{{--                <div class="col-img" style="width: 224px; height: 174.44px">--}}
+{{--                    <a href="#"><img width="224px" height="174.44px"--}}
+{{--                            src="https://lh3.googleusercontent.com/HV9Xh3UKxVixtsPVJOVRi0qlNtYSLWn62eb1WvYwlmPNUpH803EhwCSsUiAUT8VBd3ma-daR0WClHZW7IFjgBzQ-1HUZhHTD=w300-rw" alt="banner 3"></a>--}}
+{{--                </div>--}}
+{{--                <div class="col-img" style="width: 224px; height: 174.44px">--}}
+{{--                    <a href="#"><img width="224px" height="174.44px"--}}
+{{--                            src="{{ asset('source/assets/frontend/img/banner/uudai01.jpg') }}" alt="banner 3"></a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="banner-box">--}}
+{{--                <div class="col-img" style="width: 224px; height: 359.79px">--}}
+{{--                    <a href="#"><img width="224px" height="359.79px"--}}
+{{--                            src="https://lh3.googleusercontent.com/MAp_kIA2zHy8LpCAHOFXqWID6ZQu5SlebPq4Nafktu0zixFfuFdUtgvVnl2XQ1cTFVB5pRTct7unjJ--fmucvY3LoB4SOQJr" alt="banner 3"></a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="banner-box">--}}
+{{--                <div class="col-img" style="width: 224px; height: 174.44px">--}}
+{{--                    <a href="#"><img width="224px" height="174.44px"--}}
+{{--                            src="{{ asset('source/assets/frontend/img/banner/uudai02.png') }}" alt="banner 3"></a>--}}
+{{--                </div>--}}
+{{--                <div class="col-img" style="width: 224px; height: 174.44px">--}}
+{{--                    <a href="#"><img width="224px" height="174.44px"--}}
+{{--                            src="{{ asset('source/assets/frontend/img/banner/uudai03.jpg') }}" alt="banner 3"></a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="banner-box">--}}
+{{--                <div class="col-img" style="width: 224px; height: 359.79px">--}}
+{{--                    <a href="#"><img width="224px" height="359.79px"--}}
+{{--                            src="https://lh3.googleusercontent.com/0U65LCgsBBtls6MDCPOjpSS3YIb7G05a9OlysJWXe1NYCo0RTR6oRP4giE4pesfTu6txbL4kNtKJWucP32Fx5HHxc-ljNYk" alt="banner 3"></a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="banner-box">--}}
+{{--                <div class="col-img" style="width: 224px; height: 174.44px">--}}
+{{--                    <a href="#"><img width="224px" height="174.44px"--}}
+{{--                            src="{{ asset('source/assets/frontend/img/banner/uudai04.jpg') }}" alt="banner 3"></a>--}}
+{{--                </div>--}}
+{{--                <div class="col-img" style="width: 224px; height: 174.44px">--}}
+{{--                    <a href="#"><img width="224px" height="174.44px"--}}
+{{--                            src="{{ asset('source/assets/frontend/img/banner/uudai05.jpg') }}" alt="banner 3"></a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <!-- Container End -->--}}
+{{--    </div>--}}
     <!-- Big Banner End Here -->
     <!-- Arrivals Products Area Start Here -->
     <div class="arrivals-product pb-85 pb-sm-45">
@@ -585,103 +585,103 @@
     </div>
     <!-- Lile Products Area End Here -->
     <!-- Brand Banner Area Start Here -->
-    <div class="main-brand-banner pt-95 pb-100 pt-sm-55 pb-sm-60">
-        <div class="container">
-            <div class="section-ttitle mb-20">
-                <h2>{{ trans('home.goodbrand') }}</h2>
-            </div>
-            <div class="row no-gutters">
-                <div class="col-lg-3">
-                    <div class="col-img" style="width: 292.5px; height: 326.74px">
-                        <img width="292.5px" height="326.74px"
-                            src="{{ asset('source/assets/frontend/img/banner/thuonghieu01.jpg') }}" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <!-- Brand Banner Start -->
-                    <div class="brand-banner owl-carousel">
-                        <div class="single-brand">
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    class="img" src="{{ asset('source/assets/frontend/img/brand/4.jpg') }}"
-                                    alt="brand-image"></a>
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    class="img" src="{{ asset('source/assets/frontend/img/brand/6.jpg') }}"
-                                    alt="brand-image"></a>
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    class="img" src="{{ asset('source/assets/frontend/img/brand/2.jpg') }}"
-                                    alt="brand-image"></a>
-                        </div>
-                        <div class="single-brand">
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    class="img" src="{{ asset('source/assets/frontend/img/brand/5.jpg') }}"
-                                    alt="brand-image"></a>
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    src="{{ asset('source/assets/frontend/img/brand/2.jpg') }}" alt="brand-image"></a>
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    src="{{ asset('source/assets/frontend/img/brand/5.jpg') }}" alt="brand-image"></a>
-                        </div>
-                        <div class="single-brand">
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    src="{{ asset('source/assets/frontend/img/brand/1.jpg') }}" alt="brand-image"></a>
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    src="{{ asset('source/assets/frontend/img/brand/5.jpg') }}" alt="brand-image"></a>
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    src="{{ asset('source/assets/frontend/img/brand/3.jpg') }}" alt="brand-image"></a>
+{{--    <div class="main-brand-banner pt-95 pb-100 pt-sm-55 pb-sm-60">--}}
+{{--        <div class="container">--}}
+{{--            <div class="section-ttitle mb-20">--}}
+{{--                <h2>{{ trans('home.goodbrand') }}</h2>--}}
+{{--            </div>--}}
+{{--            <div class="row no-gutters">--}}
+{{--                <div class="col-lg-3">--}}
+{{--                    <div class="col-img" style="width: 292.5px; height: 326.74px">--}}
+{{--                        <img width="292.5px" height="326.74px"--}}
+{{--                            src="{{ asset('source/assets/frontend/img/banner/thuonghieu01.jpg') }}" alt="">--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-6">--}}
+{{--                    <!-- Brand Banner Start -->--}}
+{{--                    <div class="brand-banner owl-carousel">--}}
+{{--                        <div class="single-brand">--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    class="img" src="{{ asset('source/assets/frontend/img/brand/4.jpg') }}"--}}
+{{--                                    alt="brand-image"></a>--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    class="img" src="{{ asset('source/assets/frontend/img/brand/6.jpg') }}"--}}
+{{--                                    alt="brand-image"></a>--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    class="img" src="{{ asset('source/assets/frontend/img/brand/2.jpg') }}"--}}
+{{--                                    alt="brand-image"></a>--}}
+{{--                        </div>--}}
+{{--                        <div class="single-brand">--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    class="img" src="{{ asset('source/assets/frontend/img/brand/5.jpg') }}"--}}
+{{--                                    alt="brand-image"></a>--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    src="{{ asset('source/assets/frontend/img/brand/2.jpg') }}" alt="brand-image"></a>--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    src="{{ asset('source/assets/frontend/img/brand/5.jpg') }}" alt="brand-image"></a>--}}
+{{--                        </div>--}}
+{{--                        <div class="single-brand">--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    src="{{ asset('source/assets/frontend/img/brand/1.jpg') }}" alt="brand-image"></a>--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    src="{{ asset('source/assets/frontend/img/brand/5.jpg') }}" alt="brand-image"></a>--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    src="{{ asset('source/assets/frontend/img/brand/3.jpg') }}" alt="brand-image"></a>--}}
 
-                        </div>
-                        <div class="single-brand">
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    src="{{ asset('source/assets/frontend/img/brand/5.jpg') }}" alt="brand-image"></a>
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    src="{{ asset('source/assets/frontend/img/brand/3.jpg') }}" alt="brand-image"></a>
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    src="{{ asset('source/assets/frontend/img/brand/4.jpg') }}" alt="brand-image"></a>
-                        </div>
-                        <div class="single-brand">
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    src="{{ asset('source/assets/frontend/img/brand/3.jpg') }}" alt="brand-image"></a>
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    src="{{ asset('source/assets/frontend/img/brand/2.jpg') }}" alt="brand-image"></a>
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    src="{{ asset('source/assets/frontend/img/brand/5.jpg') }}" alt="brand-image"></a>
-                        </div>
-                        <div class="single-brand">
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    src="{{ asset('source/assets/frontend/img/brand/2.jpg') }}" alt="brand-image"></a>
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    src="{{ asset('source/assets/frontend/img/brand/3.jpg') }}" alt="brand-image"></a>
-                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"
-                                    src="{{ asset('source/assets/frontend/img/brand/4.jpg') }}" alt="brand-image"></a>
-                        </div>
-                    </div>
-                    <!-- Brand Banner End -->
+{{--                        </div>--}}
+{{--                        <div class="single-brand">--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    src="{{ asset('source/assets/frontend/img/brand/5.jpg') }}" alt="brand-image"></a>--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    src="{{ asset('source/assets/frontend/img/brand/3.jpg') }}" alt="brand-image"></a>--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    src="{{ asset('source/assets/frontend/img/brand/4.jpg') }}" alt="brand-image"></a>--}}
+{{--                        </div>--}}
+{{--                        <div class="single-brand">--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    src="{{ asset('source/assets/frontend/img/brand/3.jpg') }}" alt="brand-image"></a>--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    src="{{ asset('source/assets/frontend/img/brand/2.jpg') }}" alt="brand-image"></a>--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    src="{{ asset('source/assets/frontend/img/brand/5.jpg') }}" alt="brand-image"></a>--}}
+{{--                        </div>--}}
+{{--                        <div class="single-brand">--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    src="{{ asset('source/assets/frontend/img/brand/2.jpg') }}" alt="brand-image"></a>--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    src="{{ asset('source/assets/frontend/img/brand/3.jpg') }}" alt="brand-image"></a>--}}
+{{--                            <a style="width: 194.33px; height: 108.33px" href="#"><img width="173.33px" height="82.53px"--}}
+{{--                                    src="{{ asset('source/assets/frontend/img/brand/4.jpg') }}" alt="brand-image"></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <!-- Brand Banner End -->--}}
 
-                </div>
-                <div class="col-lg-3">
-                    <div class="col-img" style="width: 292.5px; height: 326.74px">
-                        <img width="292.5px" height="326.74px"
-                            src="{{ asset('source/assets/frontend/img/banner/thuonghieu02.jpg') }}" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Container End -->
-    </div>
+{{--                </div>--}}
+{{--                <div class="col-lg-3">--}}
+{{--                    <div class="col-img" style="width: 292.5px; height: 326.74px">--}}
+{{--                        <img width="292.5px" height="326.74px"--}}
+{{--                            src="{{ asset('source/assets/frontend/img/banner/thuonghieu02.jpg') }}" alt="">--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <!-- Container End -->--}}
+{{--    </div>--}}
     <!-- Brand Banner Area End Here -->
-    <div class="big-banner pb-100 pb-sm-60">
-        <div class="container big-banner-box">
-            <div class="col-img" style="width: 580px; height: 240px">
-                <a href="#">
-                    <img width="580px" height="240px"
-                        src="{{ asset('source/assets/frontend/img/banner/thuonghieu03.jpg') }}" alt="">
-                </a>
-            </div>
-            <div class="col-img" style="width: 580px; height: 240px">
-                <a href="#">
-                    <img src="{{ asset('source/assets/frontend/img/banner/thuonghieu04.jpg') }}" alt="">
-                </a>
-            </div>
-        </div>
-        <!-- Container End -->
-    </div>
+{{--    <div class="big-banner pb-100 pb-sm-60">--}}
+{{--        <div class="container big-banner-box">--}}
+{{--            <div class="col-img" style="width: 580px; height: 240px">--}}
+{{--                <a href="#">--}}
+{{--                    <img width="580px" height="240px"--}}
+{{--                        src="{{ asset('source/assets/frontend/img/banner/thuonghieu03.jpg') }}" alt="">--}}
+{{--                </a>--}}
+{{--            </div>--}}
+{{--            <div class="col-img" style="width: 580px; height: 240px">--}}
+{{--                <a href="#">--}}
+{{--                    <img src="{{ asset('source/assets/frontend/img/banner/thuonghieu04.jpg') }}" alt="">--}}
+{{--                </a>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <!-- Container End -->--}}
+{{--    </div>--}}
 @endsection

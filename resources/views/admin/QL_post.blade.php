@@ -59,24 +59,7 @@
                             <th>{{ trans('home.languagevi') }}</th>
                             <th>{{ trans('home.languageen') }}</th>
                             <th>
-                                @if(config('app.locale') != 'vi') 
-                                    {{ trans('Ql_sp.mota') }} en
-                                @else
-                                    {{ trans('Ql_sp.mota') }} vi
-                                @endif
-                            </th>
-                            <th>Url</th>
-                            <th>{{ trans('Ql_sp.sua_xoa') }}</th>
-                            
-                        </tr>
-                    </thead>
-                    <tfoot style="text-align: center;">
-                        <tr>
-                            <th>STT</th>
-                            <th>{{ trans('home.languagevi') }}</th>
-                            <th>{{ trans('home.languageen') }}</th>
-                            <th>
-                                @if(config('app.locale') != 'vi') 
+                                @if(config('app.locale') != 'vi')
                                     {{ trans('Ql_sp.mota') }} en
                                 @else
                                     {{ trans('Ql_sp.mota') }} vi
@@ -86,7 +69,24 @@
                             <th>{{ trans('Ql_sp.sua_xoa') }}</th>
 
                         </tr>
-                    </tfoot>
+                    </thead>
+{{--                    <tfoot style="text-align: center;">--}}
+{{--                        <tr>--}}
+{{--                            <th>STT</th>--}}
+{{--                            <th>{{ trans('home.languagevi') }}</th>--}}
+{{--                            <th>{{ trans('home.languageen') }}</th>--}}
+{{--                            <th>--}}
+{{--                                @if(config('app.locale') != 'vi') --}}
+{{--                                    {{ trans('Ql_sp.mota') }} en--}}
+{{--                                @else--}}
+{{--                                    {{ trans('Ql_sp.mota') }} vi--}}
+{{--                                @endif--}}
+{{--                            </th>--}}
+{{--                            <th>Url</th>--}}
+{{--                            <th>{{ trans('Ql_sp.sua_xoa') }}</th>--}}
+
+{{--                        </tr>--}}
+{{--                    </tfoot>--}}
                     <tbody style="text-align: center;">
                     @foreach($ngonngu as $key => $nnnn)
                        <tr>
@@ -118,7 +118,7 @@
                                         <div class="modal-body">Chọn "Delete" bên dưới nếu bạn đã chắc chắn muốn xóa.</div>
                                         <div class="modal-footer">
                                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Huỷ bỏ</button>
-                           
+
                                             <form method="" action="{{route('deletenn',$nnnn->id_post)}}">
 
                                                 <button type="submit" class="btn btn-danger">
@@ -148,7 +148,7 @@
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label style="font-weight: bold; color: #000" >Name Product_vi</label>
-                                                    <input type="text" id="sp_vi_{{$nnnn->id_post}}" name="sp_vi" class="form-control" value="{{$nnnn->sp_vi}}" 
+                                                    <input type="text" id="sp_vi_{{$nnnn->id_post}}" name="sp_vi" class="form-control" value="{{$nnnn->sp_vi}}"
                                                     />
 
                                                 </div>
@@ -177,7 +177,7 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
 
                         </tr>
                     @endforeach
@@ -195,13 +195,13 @@
     <div class="modal" id="ExcelLang">
         <div class="modal-dialog">
           <div class="modal-content">
-          
+
             <!-- Modal Header -->
             <div class="modal-header">
               <h4 class="modal-title">{{ trans('home_ad.import') }} / {{ trans('home_ad.export') }} Excel</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            
+
             <!-- Modal body -->
             <div class="modal-body">
                 <div style="margin-top: 15px; margin-bottom: 10px; margin-left: 2px">
@@ -232,12 +232,12 @@
                     </table>
                 </div>
             </div>
-            
+
             <!-- Modal footer -->
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
-            
+
           </div>
         </div>
     </div>
@@ -286,13 +286,13 @@
                 </form>
             </div>
         </div>
-    </div> 
+    </div>
 
 <style type="text/css">
 
     .classs-style li{
         list-style-type: none;
     }
- 
+
 </style>
 @endsection

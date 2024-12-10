@@ -1,6 +1,6 @@
  @extends('admin/Admin')
 
-@section('title-ad')   
+@section('title-ad')
     {{ trans('home_ad.ql_dh') }}
 @endsection
 
@@ -42,29 +42,29 @@
                             <th>{{ trans('Ql_sp.sua_xoa') }}</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>STT </th>
-                            <th>{{ trans('Ql_sp.tenkh') }}</th>
-                            <th>Email</th>
-                            <th>{{ trans('Ql_sp.pay') }}</th>
-                            <!-- <th style="width: 15em;word-wrap:break-word;">Address</th> -->
-                            <!-- <th>Phone Number</th> -->
-                            <th>{{ trans('home_ad.codeorder') }}</th>
-                            <th>{{ trans('Ql_sp.trangthai') }}</th>
-                           <!--  <th>Created At </th>
-                            <th>Total Money</th>
-                            <th>Payment Methods</th>
-                            <th>Note</th> -->
-                            <th>{{ trans('Ql_sp.sua_xoa') }}</th>
-                        </tr>
-                    </tfoot>
+{{--                    <tfoot>--}}
+{{--                        <tr>--}}
+{{--                            <th>STT </th>--}}
+{{--                            <th>{{ trans('Ql_sp.tenkh') }}</th>--}}
+{{--                            <th>Email</th>--}}
+{{--                            <th>{{ trans('Ql_sp.pay') }}</th>--}}
+{{--                            <!-- <th style="width: 15em;word-wrap:break-word;">Address</th> -->--}}
+{{--                            <!-- <th>Phone Number</th> -->--}}
+{{--                            <th>{{ trans('home_ad.codeorder') }}</th>--}}
+{{--                            <th>{{ trans('Ql_sp.trangthai') }}</th>--}}
+{{--                           <!--  <th>Created At </th>--}}
+{{--                            <th>Total Money</th>--}}
+{{--                            <th>Payment Methods</th>--}}
+{{--                            <th>Note</th> -->--}}
+{{--                            <th>{{ trans('Ql_sp.sua_xoa') }}</th>--}}
+{{--                        </tr>--}}
+{{--                    </tfoot>--}}
                     <tbody>
                         @foreach($donhang_huy as $key => $dh)
                         <tr>
                             <td>{{$key+=1}}</td>
                             <td>{{$dh->name}}</td>
-                            
+
                             <td>{{$dh->email}}</td>
                             <td>{{$dh->payment}}</td>
                             <td>{{$dh->order_code}}</td>
@@ -77,11 +77,11 @@
                                     <span class="xanhla tag-style"> Đang vận chuyển</span>
                                     <?php
                                      }elseif($dh->status_bill==0){
-                                    ?>  
+                                    ?>
                                      <span class="still-term tag-style">Đang xử lý...</span>
                                     <?php
                                     }else{
-                                    ?> 
+                                    ?>
                                     <a ><span class="expired tag-style">Hủy đơn</span></a>
                                     <?php
                                    }
@@ -114,22 +114,22 @@
                                         <div class="modal-body">Chọn "Delete" bên dưới nếu bạn đã chắc chắn muốn xóa.</div>
                                         <div class="modal-footer">
                                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Huỷ bỏ </button>
-                                            
+
                                              <form method="" action="{{route('deletedh', $dh->id_bill)}}">
 
                                                 <button type="submit" class="btn btn-danger">
                                                     Delete
                                                 </button>
-                                            </form>                          
-                                           
-                                            
+                                            </form>
+
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                         </tr>
-                       
+
                         @endforeach
                     </tbody>
                 </table>

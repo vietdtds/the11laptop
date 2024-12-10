@@ -61,14 +61,14 @@
                             <th>{{ trans('Ql_sp.sua_xoa') }}</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>STT</th>
-                            <th>{{ trans('home.hinhanh') }}</th>
-                            <th>{{ trans('Ql_sp.tenthuonghieu') }}</th>
-                            <th>{{ trans('Ql_sp.sua_xoa') }}</th>
-                        </tr>
-                    </tfoot>
+{{--                    <tfoot>--}}
+{{--                        <tr>--}}
+{{--                            <th>STT</th>--}}
+{{--                            <th>{{ trans('home.hinhanh') }}</th>--}}
+{{--                            <th>{{ trans('Ql_sp.tenthuonghieu') }}</th>--}}
+{{--                            <th>{{ trans('Ql_sp.sua_xoa') }}</th>--}}
+{{--                        </tr>--}}
+{{--                    </tfoot>--}}
                     <tbody style="text-align: center;">
                     @foreach($nsx as $key => $nsxx)
                        <tr>

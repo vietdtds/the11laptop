@@ -76,7 +76,7 @@
                     @if(Session::get('user_name_login'))
 
                     @elseif(Auth::user()->level == 1)
-                    <li><a href="{{route('trang-chu-admin')}}">Go Admin</a></li>
+                    <li><a href="{{route('trang-chu-admin')}}">Đi tới trang quản lý</a></li>
                     @endif
                     @else
      <!--                <li><a href="#">My Account<i class="lnr lnr-chevron-down"></i></a>
@@ -96,12 +96,12 @@
     </div>
     <!-- Header Top End Here -->
     <!-- Header Middle Start Here -->
-    <div class="header-middle ptb-15">
+    <div class="header-middle">
         <div class="container">
             <div class="row align-items-center no-gutters">
                 <div class="col-lg-3 col-md-12">
                     <div class="logo mb-all-30">
-                        <a href="{{route('trang-chu')}}"><img src="{{asset('source/assets/dest/images/the11laptop.png')}}" style="width: 214px; height: 162px" alt="logo-image"></a>
+                        <a href="{{route('trang-chu')}}"><img src="{{asset('source/assets/dest/images/logo-tsmobile.png')}}" style="width: 174px; height: 122px" alt="logo-image"></a>
                     </div>
                 </div>
                 <!-- Categorie Search Box Start Here -->
@@ -199,7 +199,7 @@
                             </li>
                             @if(Auth::check() || Session::get('user_name_login'))
                             @else
-                            <li><a href="{{route('dangnhap')}}"><i class="lnr lnr-user"></i><span class="my-cart"><span> <strong>{{ trans('home.signin') }}</strong> Or</span><span> {{ trans('home.signup') }}</span></span></a>
+                            <li><a href="{{route('dangnhap')}}"><i class="lnr lnr-user"></i><span class="my-cart"><span> <strong>{{ trans('home.signin') }}</strong> hoặc</span><span> {{ trans('home.signup') }}</span></span></a>
 
                             </li>
                             @endif

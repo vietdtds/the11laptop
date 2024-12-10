@@ -34,18 +34,18 @@
                             <th>{{ trans('Ql_sp.sua_xoa') }}</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>STT</th>
-                            <th>{{ trans('Ql_sp.tenkh') }}</th>
-                            <th>Email </th>
-                            <th>{{ trans('Ql_sp.sdt') }}</th>
-                            <th>{{ trans('Ql_sp.diachi') }}</th>
-                            <th>{{ trans('Ql_sp.quyenhan') }}</th>
-                            <!-- <th>{{ trans('Ql_sp.tenkh') }}</th> -->
-                            <th>{{ trans('Ql_sp.sua_xoa') }}</th>
-                        </tr>
-                    </tfoot>
+{{--                    <tfoot>--}}
+{{--                        <tr>--}}
+{{--                            <th>STT</th>--}}
+{{--                            <th>{{ trans('Ql_sp.tenkh') }}</th>--}}
+{{--                            <th>Email </th>--}}
+{{--                            <th>{{ trans('Ql_sp.sdt') }}</th>--}}
+{{--                            <th>{{ trans('Ql_sp.diachi') }}</th>--}}
+{{--                            <th>{{ trans('Ql_sp.quyenhan') }}</th>--}}
+{{--                            <!-- <th>{{ trans('Ql_sp.tenkh') }}</th> -->--}}
+{{--                            <th>{{ trans('Ql_sp.sua_xoa') }}</th>--}}
+{{--                        </tr>--}}
+{{--                    </tfoot>--}}
                     <br>
                     <tbody style="text-align: center;">
                         @foreach($taikhoan_user as $key => $usr)
@@ -62,7 +62,7 @@
                                     <a href="{{url('/active-user/'.$usr->id)}}" class="tag-style still-term"><span class="fas fa-user-secret"></span></a>
                                     <?php
                                      }else{
-                                    ?>  
+                                    ?>
                                      <a href="{{url('/unactive-user/'.$usr->id)}}" class="tag-style expired"><span style="color: #e74a3b;" class="fas fa-user"></span></a>
                                     <?php
                                    }
@@ -79,7 +79,7 @@
                                 <!-- </a> -->
                             </td>
 
-                            
+
                             <!-- Modal Delete-->
                             <div class="modal fade" id="userDel_{{$usr->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -93,9 +93,9 @@
                                         <div class="modal-body">Chọn "Delete" bên dưới nếu bạn đã chắc chắn muốn xóa.</div>
                                         <div class="modal-footer">
                                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Huỷ bỏ</button>
-                              
+
                                             <form method="" action="{{route('delete',$usr->id)}}">
-                                                
+
                                                 <button type="submit" class="btn btn-danger">
                                                     Delete
                                                 </button>
@@ -105,7 +105,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Modal Update-->
                             <div class="modal fade" id="userUpdate_{{$usr->id}}" tabindex="-1" role="dialog" style="z-index: 1050; display: none;" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
@@ -127,7 +127,7 @@
                                             </div>
                                             @endif
                                             @if(Session::has('thongbao'))
-                                                <div class="alert alert-success" style="width: 100%">{{Session::get('thongbao')}}</div> 
+                                                <div class="alert alert-success" style="width: 100%">{{Session::get('thongbao')}}</div>
                                             @endif
                                             <div class="modal-body">
                                                 <div class="form-group">
@@ -172,13 +172,13 @@
                         </tr>
                         @endforeach
                     </tbody>
-                    
+
                 </table>
 
             </form>
         </div>
     </div>
- 
+
 </div>
 
 <!-- Modal Add-->

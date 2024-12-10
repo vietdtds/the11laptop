@@ -62,15 +62,15 @@
                             <th>{{ trans('Ql_sp.sua_xoa') }}</th>
                         </tr>
                     </thead>
-                    <tfoot style="text-align: center;">
-                        <tr>
-                            <th>STT</th>
-                            <th>Url</th>
-                            <th>{{ trans('Ql_sp.hinhanh') }}</th>
-                            <th>{{ trans('Ql_sp.trangthai') }}</th>
-                            <th>{{ trans('Ql_sp.sua_xoa') }}</th>
-                        </tr>
-                    </tfoot>
+{{--                    <tfoot style="text-align: center;">--}}
+{{--                        <tr>--}}
+{{--                            <th>STT</th>--}}
+{{--                            <th>Url</th>--}}
+{{--                            <th>{{ trans('Ql_sp.hinhanh') }}</th>--}}
+{{--                            <th>{{ trans('Ql_sp.trangthai') }}</th>--}}
+{{--                            <th>{{ trans('Ql_sp.sua_xoa') }}</th>--}}
+{{--                        </tr>--}}
+{{--                    </tfoot>--}}
                     <br>
                     <tbody style="text-align: center;">
                     @foreach($slide as $key => $sl)
